@@ -579,15 +579,15 @@ section[id] { scroll-margin-top: 86px; }
         <figure class="about-photo">
           <img src="img/home-00.jpg" alt="A gray tabby and a white-and-black cat on a cat tree" loading="lazy">
           <figcaption>
-            <span class="chip"><b>Pickles</b> the gray one</span>
-            <span class="chip"><b>George</b> the white &amp; black one</span>
-            <span class="chip"><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> both found in my backyard, a year apart</span>
+            <span class="chip"><b>Pickles</b> the gray cat</span>
+            <span class="chip"><b>George</b> the white &amp; black cat</span>
+            <span class="chip"><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> my babies! both rescued from the streets</span>
           </figcaption>
         </figure>
         <div class="about-copy">
           <span class="eyebrow">About me</span>
-          <p class="story">Hello! My name is Jiaxuan. Back in 6th grade I was a video game fanatic, and that’s also when I started making things in 3D. I even ran a tiny online business selling models and renders. A CAD class in my sophomore year of high school turned that interest into engineering, and I’ve been exploring technology ever since.</p>
-          <p class="story">Right now I’m on MIT’s Solar Electric Vehicle's Aerodynamics Team, working on improving the structure and efficiency of our car Solstice. On my own time I enjoy taking photos, building things, and I'm currently developing a game with the help of AI agents.</p>
+          <p class="story">Hello, my name is Jiaxuan! Back in 6th grade, aside from being a video game fanatic, I first started making things in 3D. I even ran a tiny online business selling models and renders. A CAD class in my sophomore year of high school turned that interest into engineering, and I’ve been exploring technology ever since.</p>
+          <p class="story">Right now I’m on MIT’s Solar Electric Vehicle's Aerodynamics Team, working on improving the structure and efficiency of our car Solstice. On my own time, I enjoy taking photos, crafting things, playing badminton, and I'm currently developing a game with the help of AI agents.</p>
           <p class="story">I’m excited to keep building my skills and to see how far engineering can take me!</p>
         </div>
       </div>
@@ -693,7 +693,7 @@ section[id] { scroll-margin-top: 86px; }
           <a class="link" href="https://github.com/jiaxuan-lin" target="_blank" rel="noopener">GitHub <span class="arr">↗</span></a>
         </div>
         <form class="msg" id="msg-form" novalidate>
-          <h3>Send me a message</h3>
+          <h3>Send me a message!</h3>
           <div class="msg-row">
             <label for="msg-name">Your name<input id="msg-name" name="name" type="text" autocomplete="name" required></label>
             <label for="msg-email">Your email<input id="msg-email" name="email" type="email" autocomplete="email" required></label>
@@ -779,8 +779,8 @@ section[id] { scroll-margin-top: 86px; }
     { id: "people", name: "People" }, { id: "creative", name: "Creative" }
   ];
   var NOTES = {};  /* photo titles/labels removed; every photo shows just the camera line */
-  var STRIP = ["city-02", "cad-00", "nature-01", "city-12", "people-14", "cad-12", "nature-07",
-               "city-56", "creative-01", "cad-15", "city-19", "nature-09", "people-04", "city-74", "cad-04", "nature-20"];
+  /* Top photo strip: favorite shots, ordered by color so it blends as it scrolls */
+  var STRIP = ["nature-02", "cad-02", "cad-00", "city-70", "nature-01", "city-10", "city-74", "cad-14", "shows-14", "city-59", "shows-03", "shows-09", "shows-06", "city-13", "city-41", "city-68"];
 
   function list(prefix) { return Object.keys(DIMS).filter(function (k) { return k.indexOf(prefix + "-") === 0; }).sort(); }
   function ordered(sid) {
