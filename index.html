@@ -207,7 +207,7 @@ section[id] { scroll-margin-top: 86px; }
 .cad-grid.made { grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
 .tile { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: left; }
 .tile .img { border-radius: 16px; overflow: hidden; background: var(--well); }
-.tile img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.tile img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
 .made .tile img { aspect-ratio: 3 / 2; }
 .tile:hover img { transform: scale(1.045); }
 .tile .cap { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 10px 4px 0; }
@@ -400,18 +400,18 @@ section[id] { scroll-margin-top: 86px; }
         </article>
         <article class="card b-m3">
           <span class="eyebrow">Math modeling</span>
-          <div class="big">Top 17%</div>
+          <div class="big" style="font-size:clamp(1.75rem,3.4vw,2.25rem);line-height:1.1">Triage Advancers (Top 17%)</div>
           <h3>M3 Math Challenge</h3>
           <p>Placed in the top 17% internationally, two years in a row.</p>
           <div class="links">
-            <a class="link" href="https://drive.google.com/file/d/17trVlA8zza9Q1kyWgT0UgiALd9tOJ5jz/view" target="_blank" rel="noopener">Report <span class="arr">↗</span></a>
-            <a class="link" href="https://drive.google.com/file/d/1rdBRqN2_Cumk-5Z-yu2oW_ZKsXLvhAFW/view" target="_blank" rel="noopener">2026 report <span class="arr">↗</span></a>
+            <a class="link" href="https://drive.google.com/file/d/17trVlA8zza9Q1kyWgT0UgiALd9tOJ5jz/view" target="_blank" rel="noopener">2025 Report <span class="arr">↗</span></a>
+            <a class="link" href="https://drive.google.com/file/d/1rdBRqN2_Cumk-5Z-yu2oW_ZKsXLvhAFW/view" target="_blank" rel="noopener">2026 Report <span class="arr">↗</span></a>
           </div>
         </article>
         <article class="card b-web">
           <span class="eyebrow">On the web</span>
           <h3>Explortle</h3>
-          <p>A website project.</p>
+          <p>Student-led STEM outreach program for underrepresented students across NYC.</p>
           <a class="link" href="https://explortle.org/" target="_blank" rel="noopener">explortle.org <span class="arr">↗</span></a>
         </article>
       </div>
@@ -499,7 +499,7 @@ section[id] { scroll-margin-top: 86px; }
         <li><a href="https://drive.google.com/file/d/1rdBRqN2_Cumk-5Z-yu2oW_ZKsXLvhAFW/view" target="_blank" rel="noopener">
           <span class="k">M3 Challenge 2026 · Top 17%</span><span class="t">M3 Math Challenge Report</span><span class="go" aria-hidden="true">↗</span></a></li>
         <li><a href="https://drive.google.com/file/d/17trVlA8zza9Q1kyWgT0UgiALd9tOJ5jz/view" target="_blank" rel="noopener">
-          <span class="k">M3 Challenge · Top 17%</span><span class="t">M3 Math Challenge Report</span><span class="go" aria-hidden="true">↗</span></a></li>
+          <span class="k">M3 Challenge 2025 · Top 17%</span><span class="t">M3 Math Challenge Report</span><span class="go" aria-hidden="true">↗</span></a></li>
       </ul>
       <p class="note">A few older articles, on 3D printing and recycling, got lost along the way.</p>
     </div>
@@ -573,7 +573,7 @@ section[id] { scroll-margin-top: 86px; }
 <script>
 (function () {
   /* Image sizes, generated from the files in img/ */
-  var DIMS = {"cad-00":[1400,786],"cad-01":[1086,610],"cad-02":[857,481],"cad-03":[1366,767],"cad-04":[1160,652],"cad-05":[854,480],"cad-06":[1071,601],"cad-07":[978,549],"cad-08":[1400,786],"cad-09":[1282,720],"cad-10":[834,468],"cad-11":[1400,786],"cad-12":[1259,707],"cad-13":[1170,657],"cad-14":[1400,934],"cad-15":[1400,934],"cad-16":[1400,934],"cad-17":[1400,934],"cad-18":[1280,719],"cad-19":[1102,666],"city-00":[1280,854],"city-01":[1400,932],"city-02":[1400,932],"city-03":[1400,933],"city-04":[1400,933],"city-05":[1400,932],"city-06":[1400,932],"city-07":[1400,933],"city-08":[1400,933],"city-09":[1400,933],"city-10":[1400,933],"city-11":[1400,932],"city-12":[1400,933],"city-13":[1400,933],"city-14":[1400,933],"city-15":[1400,933],"city-16":[1400,932],"city-17":[1400,933],"city-18":[1400,933],"city-19":[1400,933],"city-20":[1400,933],"city-21":[1400,932],"city-22":[1400,933],"city-23":[1400,933],"city-24":[1400,933],"city-25":[1400,933],"city-26":[1400,933],"city-27":[1400,933],"city-28":[1400,932],"city-29":[1400,932],"city-30":[1400,933],"city-31":[1400,933],"city-32":[1400,933],"city-33":[1400,933],"city-34":[1400,933],"city-35":[1400,933],"city-36":[1400,933],"city-37":[1400,933],"city-38":[1280,854],"city-39":[1400,933],"city-40":[1280,854],"city-41":[1400,933],"city-42":[1400,933],"city-43":[1400,933],"city-44":[1400,933],"city-45":[1400,933],"city-46":[1400,933],"city-47":[1400,933],"city-48":[1280,853],"city-49":[1400,933],"city-50":[1400,933],"city-51":[1400,933],"city-52":[1400,933],"city-53":[1400,933],"city-54":[1144,763],"city-55":[1400,933],"city-56":[933,1400],"city-57":[933,1400],"city-58":[933,1400],"city-59":[933,1400],"city-60":[933,1400],"city-61":[933,1400],"city-62":[933,1400],"city-63":[933,1400],"city-64":[933,1400],"city-65":[933,1400],"city-66":[933,1400],"city-67":[933,1400],"city-68":[933,1400],"city-69":[933,1400],"city-70":[933,1400],"city-71":[933,1400],"city-72":[933,1400],"city-73":[933,1400],"city-74":[933,1400],"city-75":[933,1400],"city-76":[933,1400],"city-77":[933,1400],"city-78":[933,1400],"city-79":[933,1400],"city-80":[933,1400],"city-81":[933,1400],"city-82":[933,1400],"city-83":[933,1400],"city-84":[933,1400],"city-85":[933,1400],"city-86":[933,1400],"city-87":[933,1400],"creative-00":[1400,933],"creative-01":[1400,933],"creative-02":[933,1400],"creative-03":[933,1400],"home-00":[1400,1315],"home-01":[1400,934],"home-02":[1400,933],"nature-00":[1280,854],"nature-01":[1400,933],"nature-02":[1280,853],"nature-03":[1400,932],"nature-04":[1280,854],"nature-05":[1400,933],"nature-06":[1400,933],"nature-07":[1400,933],"nature-08":[1280,853],"nature-09":[1400,933],"nature-10":[1400,933],"nature-11":[1400,933],"nature-12":[1280,854],"nature-13":[1400,933],"nature-14":[1400,933],"nature-15":[1400,933],"nature-16":[933,1400],"nature-17":[933,1400],"nature-18":[933,1400],"nature-19":[933,1400],"nature-20":[933,1400],"nature-21":[933,1400],"nature-22":[933,1400],"people-00":[1400,933],"people-01":[1400,933],"people-02":[1400,933],"people-03":[1280,854],"people-04":[1400,933],"people-05":[1400,933],"people-06":[1400,933],"people-07":[1400,933],"people-08":[1400,933],"people-09":[1400,933],"people-10":[1400,933],"people-11":[1400,933],"people-12":[1400,933],"people-13":[1400,933],"people-14":[1400,933],"people-15":[1400,932]};
+  var DIMS = {"cad-00":[1400,786],"cad-01":[1086,610],"cad-02":[857,481],"cad-03":[1366,767],"cad-04":[1160,652],"cad-05":[854,480],"cad-06":[1071,601],"cad-07":[978,549],"cad-08":[1400,786],"cad-09":[1282,720],"cad-10":[834,468],"cad-11":[1400,786],"cad-12":[1259,707],"cad-13":[1170,657],"cad-14":[1400,934],"cad-15":[1400,934],"cad-16":[1400,934],"cad-17":[1400,934],"cad-18":[1280,719],"cad-19":[1102,666],"city-00":[1280,854],"city-01":[1400,932],"city-02":[1400,932],"city-03":[1400,933],"city-04":[1400,933],"city-05":[1400,932],"city-06":[1400,932],"city-07":[1400,933],"city-08":[1400,933],"city-09":[1400,933],"city-10":[1400,933],"city-11":[1400,932],"city-12":[1400,933],"city-13":[1400,933],"city-14":[1400,933],"city-15":[1400,933],"city-16":[1400,932],"city-17":[1400,933],"city-18":[1400,933],"city-19":[1400,933],"city-20":[1400,933],"city-21":[1400,932],"city-22":[1400,933],"city-23":[1400,933],"city-24":[1400,933],"city-25":[1400,933],"city-26":[1400,933],"city-27":[1400,933],"city-28":[1400,932],"city-29":[1400,932],"city-30":[1400,933],"city-31":[1400,933],"city-32":[1400,933],"city-33":[1400,933],"city-34":[1400,933],"city-35":[1400,933],"city-36":[1400,933],"city-37":[1400,933],"city-38":[1280,854],"city-39":[1400,933],"city-40":[1280,854],"city-41":[1400,933],"city-42":[1400,933],"city-43":[1400,933],"city-44":[1400,933],"city-45":[1400,933],"city-46":[1400,933],"city-47":[1400,933],"city-48":[1280,853],"city-49":[1400,933],"city-50":[1400,933],"city-51":[1400,933],"city-52":[1400,933],"city-53":[1400,933],"city-54":[1144,763],"city-55":[1400,933],"city-56":[933,1400],"city-57":[933,1400],"city-58":[933,1400],"city-59":[933,1400],"city-60":[933,1400],"city-61":[933,1400],"city-62":[933,1400],"city-63":[933,1400],"city-64":[933,1400],"city-65":[933,1400],"city-66":[933,1400],"city-67":[933,1400],"city-68":[933,1400],"city-69":[933,1400],"city-70":[933,1400],"city-71":[933,1400],"city-72":[933,1400],"city-73":[933,1400],"city-74":[933,1400],"city-75":[933,1400],"city-76":[933,1400],"city-77":[933,1400],"city-78":[933,1400],"city-79":[933,1400],"city-80":[933,1400],"city-81":[933,1400],"city-82":[933,1400],"city-83":[933,1400],"city-84":[933,1400],"city-85":[933,1400],"city-86":[933,1400],"city-87":[933,1400],"creative-00":[1400,933],"creative-01":[1400,933],"creative-02":[933,1400],"creative-03":[933,1400],"home-00":[1400,1315],"home-01":[1400,934],"home-02":[1400,933],"nature-00":[1280,854],"nature-01":[1400,933],"nature-02":[1280,853],"nature-03":[1400,932],"nature-04":[1280,854],"nature-05":[1400,933],"nature-06":[1400,933],"nature-07":[1400,933],"nature-08":[1280,853],"nature-09":[1400,933],"nature-10":[1400,933],"nature-11":[1400,933],"nature-12":[1280,854],"nature-13":[1400,933],"nature-14":[1400,933],"nature-15":[1400,933],"nature-16":[933,1400],"nature-17":[933,1400],"nature-18":[933,1400],"nature-19":[933,1400],"nature-20":[933,1400],"nature-21":[933,1400],"nature-22":[933,1400],"people-00":[1400,933],"people-01":[1400,933],"people-02":[1400,933],"people-03":[1280,854],"people-04":[1400,933],"people-05":[1400,933],"people-06":[1400,933],"people-07":[1400,933],"people-08":[1400,933],"people-09":[1400,933],"people-10":[1400,933],"people-11":[1400,933],"people-12":[1400,933],"people-13":[1400,933],"people-14":[1400,933],"people-15":[1400,932],"shows-00":[933,1400],"shows-01":[1400,933],"shows-02":[1400,933],"shows-03":[933,1400],"shows-04":[933,1400],"shows-05":[1400,933],"shows-06":[1400,933],"shows-07":[933,1400],"shows-08":[933,1400],"shows-09":[933,1400],"shows-10":[933,1400],"shows-11":[933,1400],"shows-12":[1400,933],"shows-13":[1400,933],"shows-14":[1400,933],"shows-15":[933,1400],"shows-16":[1400,933],"shows-17":[1400,933],"shows-18":[1400,933],"shows-19":[933,1400]};
 
   var CAD = [
     ["cad-00", "Camaro Model", "model"],
@@ -600,7 +600,7 @@ section[id] { scroll-margin-top: 86px; }
   var TAG = { model: "Inventor", made: "Made", plan: "AutoCAD" };
   var SERIES = [
     { id: "city", name: "City" }, { id: "nature", name: "Nature" },
-    { id: "people", name: "People" }, { id: "creative", name: "Creative" }
+    { id: "people", name: "People" }, { id: "shows", name: "Shows" }, { id: "creative", name: "Creative" }
   ];
   var NOTES = {
     "city-12": ["Koreatown", "f/4.4 · 1/250s · ISO 12800"],
