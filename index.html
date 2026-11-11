@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jiaxuan Lin</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Jiaxuan Lin: MIT engineering student who designs and builds things, and photographs the little details.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,19 +14,22 @@
 <style>
 /* Layout: one calm 70rem column. Hero (name + one-line intro) over a slow photo strip,
    then a bento of highlights, about, CAD grid, photo gallery with a segmented control,
-   writing list, videos, and a soft blush contact card. One accent: dusty rose. */
+   writing list, videos, and a soft blush contact card. Snorlax palette: belly-cream ground, Snorlax teal-blue accent, a hint of blush. */
 :root {
-  --bg: #fcfafb;
+  --bg: #fbf7ef;
+  --glow: #d9edf2;
+  --glow2: #fbe7e2;
   --surface: #ffffff;
-  --soft: #f8eef2;
-  --well: #f2eff6;
-  --ink: #2b2430;
-  --muted: #776b7d;
-  --line: #ece3e8;
-  --accent: #cf5d88;
+  --soft: #e3f1f4;
+  --well: #e9f1f4;
+  --ink: #1f3a46;
+  --muted: #637a84;
+  --line: #e5e7e1;
+  --accent: #2f8095;
   --accent-ink: #ffffff;
-  --shadow: 0 1px 2px rgba(60, 30, 50, .04), 0 12px 32px -16px rgba(120, 50, 85, .22);
-  --shade: rgba(24, 18, 26, .9);
+  --shadow: 0 1px 2px rgba(30, 70, 85, .05), 0 14px 34px -16px rgba(30, 80, 100, .25);
+  --shade: rgba(16, 34, 42, .9);
+  color-scheme: light;
 
   --serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --sans: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -37,25 +42,32 @@
   --s3: clamp(1.875rem, 4.4vw, 2.75rem);
   --s4: clamp(3rem, 9vw, 6.5rem);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #151217; --surface: #1e1a21; --soft: #2a1f27; --well: #24202b; --ink: #f3edf1;
-    --muted: #a99daf; --line: #2f2833; --accent: #f08fb2; --accent-ink: #2a0f1b;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 14px 32px -16px rgba(0,0,0,.6); --shade: rgba(8, 6, 10, .94);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #151217; --surface: #1e1a21; --soft: #2a1f27; --well: #24202b; --ink: #f3edf1;
-  --muted: #a99daf; --line: #2f2833; --accent: #f08fb2; --accent-ink: #2a0f1b;
-  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 14px 32px -16px rgba(0,0,0,.6); --shade: rgba(8, 6, 10, .94);
+
+:root[data-mode="dark"] {
+  --bg: #142228;
+  --glow: #1d3a44;
+  --glow2: #2b2530;
+  --surface: #1a2c33;
+  --soft: #20383f;
+  --well: #1b2e35;
+  --ink: #ebf2f1;
+  --muted: #9fb3b6;
+  --line: #2a4149;
+  --accent: #7cc3d3;
+  --accent-ink: #0d2128;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 14px 34px -16px rgba(0, 0, 0, .6);
+  --shade: rgba(6, 14, 18, .94);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  margin: 0; background: var(--bg); color: var(--ink);
+  margin: 0; color: var(--ink);
+  background:
+    radial-gradient(900px 560px at 12% -10%, var(--glow), transparent 70%) no-repeat,
+    radial-gradient(900px 560px at 92% -6%, var(--glow2), transparent 70%) no-repeat,
+    var(--bg);
   font-family: var(--sans); font-size: var(--s0); line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -67,7 +79,8 @@ a { color: inherit; }
 img { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 10px; }
-.heart { width: .72em; height: .72em; fill: var(--accent); display: inline-block; vertical-align: .02em; }
+.snor { height: 1.15em; width: auto; display: inline-block; vertical-align: -.22em; transition: transform .3s cubic-bezier(.2,.8,.2,1.4); }
+.snor:hover { transform: rotate(-8deg) scale(1.15); }
 
 .wrap {
   max-width: 70rem; margin: 0 auto;
@@ -90,7 +103,8 @@ button { font: inherit; color: inherit; }
   box-shadow: var(--shadow);
 }
 .brand { font-family: var(--serif); font-weight: 600; font-size: 1.0625rem; text-decoration: none; padding: 5px 12px 5px 14px; white-space: nowrap; }
-.nav-links { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.nav { width: max-content; }
+.nav-links { display: flex; gap: 2px; flex: none; }
 .nav-links::-webkit-scrollbar { display: none; }
 .nav-links a {
   text-decoration: none; font-size: .875rem; font-weight: 600; color: var(--muted);
@@ -98,20 +112,68 @@ button { font: inherit; color: inherit; }
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-links a[aria-current="true"] { background: var(--soft); color: var(--accent); }
-@media (max-width: 560px) { .nav-links .opt { display: none; } }
+/* "More" dropdown: links that don't fit in the bar fold in here (Videos, Writing, Photos first) */
+.more-wrap { position: relative; flex: none; }
+.more-wrap[hidden] { display: none; }
+.more-btn {
+  display: inline-flex; align-items: center; gap: 4px; cursor: pointer; border: 0; background: none;
+  padding: 7px 11px 7px 13px; border-radius: 999px; font-weight: 600; font-size: .875rem; color: var(--muted);
+  transition: color .2s, background .2s;
+}
+.more-btn svg { width: 14px; height: 14px; transition: transform .25s; }
+.more-btn:hover { color: var(--ink); }
+.more-wrap.open .more-btn, .more-btn.has-current { background: var(--soft); color: var(--accent); }
+.more-wrap.open .more-btn svg { transform: rotate(180deg); }
+.more-panel {
+  position: absolute; top: calc(100% + 12px); right: -6px; min-width: 176px; z-index: 5;
+  display: flex; flex-direction: column; gap: 2px; padding: 6px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow);
+  opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.98); transform-origin: top right;
+  transition: opacity .2s ease, transform .25s cubic-bezier(.2,.8,.2,1), visibility 0s linear .25s;
+}
+.more-wrap.open .more-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.more-panel a {
+  text-decoration: none; font-size: .9375rem; font-weight: 600; color: var(--muted);
+  padding: 10px 14px; border-radius: 12px; white-space: nowrap; transition: color .2s, background .2s;
+}
+.more-panel a:hover { background: var(--soft); color: var(--ink); }
+.more-panel a[aria-current="true"] { background: var(--soft); color: var(--accent); }
+
+.mode {
+  position: relative; flex: none; display: inline-flex; margin-left: 4px; padding: 3px; cursor: pointer;
+  border-radius: 999px; border: 1px solid var(--line); background: var(--soft);
+}
+.mode::before {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .3);
+  transition: transform .4s cubic-bezier(.2,.8,.2,1.2);
+}
+:root[data-mode="dark"] .mode::before { transform: translateX(30px); }
+.mode span { position: relative; z-index: 1; width: 30px; height: 30px; display: grid; place-items: center; color: var(--muted); transition: color .3s; }
+.mode svg { width: 16px; height: 16px; }
+.mode .i-sun, :root[data-mode="dark"] .mode .i-moon { color: var(--accent-ink); }
+:root[data-mode="dark"] .mode .i-sun { color: var(--muted); }
+.mode:hover span { transform: scale(1.06); }
+body, .card, .nav, .profile, .tile .img, .seg, .chip, .mail, .btn { transition: background-color .35s ease, color .35s ease, border-color .35s ease; }
 
 /* ---------- Hero ---------- */
 .hero { padding-block: clamp(56px, 10vw, 120px) 0; }
-.status {
-  display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 10px; border-radius: 999px;
-  background: var(--surface); border: 1px solid var(--line); font-size: .875rem; font-weight: 500; color: var(--muted);
+.profile {
+  max-width: 46rem; margin: 0 0 28px; padding: 4px 24px; border-radius: 22px;
+  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
 }
-.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--soft); }
+.p-row { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 4px 18px; align-items: baseline; padding: 16px 0; }
+.p-row + .p-row { border-top: 1px solid var(--line); }
+.p-k { font-size: .8125rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.p-k small { display: block; margin-top: 3px; font-size: .6875rem; font-weight: 600; letter-spacing: .1em; color: var(--muted); }
+.p-v { font-size: clamp(1.0625rem, 2vw, 1.3125rem); line-height: 1.45; text-wrap: pretty; }
+.p-v b { font-family: var(--serif); font-weight: 500; font-size: 1.3em; letter-spacing: -.01em; }
+@media (max-width: 560px) { .p-row { grid-template-columns: minmax(0, 1fr); } .profile { padding: 2px 18px; } }
 .hero h1 {
   font-family: var(--serif); font-weight: 500; font-size: var(--s4); line-height: .98; letter-spacing: -.03em;
   margin: 22px 0 18px; font-variation-settings: "opsz" 144;
 }
-.hero h1 .heart { width: .38em; height: .38em; vertical-align: .55em; margin-left: .08em; }
+.hero h1 .snor { height: .62em; vertical-align: .02em; margin-left: .14em; }
 .lede { font-size: clamp(1.1875rem, 2.2vw, 1.375rem); line-height: 1.55; max-width: 36rem; margin: 0 0 30px; color: var(--muted); text-wrap: pretty; }
 .lede em { font-family: var(--serif); font-style: italic; color: var(--ink); font-size: 1.08em; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -122,7 +184,7 @@ button { font: inherit; color: inherit; }
   transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, background .2s;
 }
 .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .btn .arr { transition: transform .25s; }
 .btn:hover .arr { transform: translateX(3px); }
 
@@ -189,11 +251,11 @@ section[id] { scroll-margin-top: 86px; }
 .about { display: grid; gap: 32px 64px; grid-template-columns: minmax(0, 1fr); align-items: center; }
 @media (min-width: 900px) { .about { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
 .about-photo { margin: 0; position: relative; }
-.about-photo img { width: 100%; aspect-ratio: 1280 / 1203; object-fit: cover; border-radius: 24px; }
+.about-photo > img { width: 100%; aspect-ratio: 1280 / 1203; object-fit: cover; border-radius: 24px; }
 .about-photo figcaption { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .875rem; }
 .chip b { font-weight: 600; }
-.chip .heart { width: .8em; height: .8em; }
+.chip .snor { height: 1.3em; }
 .about-copy p { margin: 0 0 1em; max-width: 36rem; color: var(--muted); }
 .about-copy p.intro { font-family: var(--serif); font-size: clamp(1.375rem, 2.6vw, 1.75rem); line-height: 1.35; color: var(--ink); letter-spacing: -.01em; }
 .about-copy p.intro em { color: var(--accent); }
@@ -226,7 +288,7 @@ section[id] { scroll-margin-top: 86px; }
 }
 .seg::-webkit-scrollbar { display: none; }
 .seg-ind {
-  position: absolute; top: 4px; bottom: 4px; left: 0; width: 0; border-radius: 999px; background: var(--ink);
+  position: absolute; top: 4px; bottom: 4px; left: 0; width: 0; border-radius: 999px; background: var(--accent);
   transition: transform .35s cubic-bezier(.2,.8,.2,1), width .35s cubic-bezier(.2,.8,.2,1);
 }
 .tab {
@@ -235,10 +297,11 @@ section[id] { scroll-margin-top: 86px; }
   transition: color .3s;
 }
 .tab small { font-weight: 500; opacity: .65; margin-left: 4px; }
-.tab[aria-selected="true"] { color: var(--bg); }
-.gallery { columns: 3 15rem; column-gap: 12px; }
+.tab[aria-selected="true"] { color: var(--accent-ink); }
+.gallery { display: flex; gap: 12px; align-items: flex-start; }
+.gcol { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
 .gallery .ph {
-  display: block; width: 100%; margin: 0 0 12px; padding: 0; border: 0; background: var(--well);
+  display: block; width: 100%; margin: 0; padding: 0; border: 0; background: var(--well);
   border-radius: 14px; overflow: hidden; break-inside: avoid; cursor: zoom-in; position: relative;
 }
 .gallery .ph img { width: 100%; height: auto; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
@@ -249,6 +312,11 @@ section[id] { scroll-margin-top: 86px; }
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
 }
 .gallery.swap { animation: fadein .45s ease both; }
+.more {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px;
+  margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line);
+}
+.more-lbl { flex-basis: 100%; text-align: center; font-size: .875rem; color: var(--muted); margin-bottom: 2px; }
 @keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 /* ---------- Writing ---------- */
@@ -336,22 +404,53 @@ section[id] { scroll-margin-top: 86px; }
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.1 1.7-1.9 3.2-3.1 5.3-3.1 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></symbol>
-</svg>
+
+<script>
+(function () {
+  var root = document.documentElement, saved = null;
+  try { saved = localStorage.getItem("jl-mode"); } catch (e) {}
+  if (saved === "dark") root.setAttribute("data-mode", "dark");
+  function sync(btn) {
+    var dark = root.getAttribute("data-mode") === "dark";
+    btn.setAttribute("aria-checked", dark ? "true" : "false");
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var btn = document.getElementById("mode");
+    if (!btn) return;
+    sync(btn);
+    btn.addEventListener("click", function () {
+      var dark = root.getAttribute("data-mode") !== "dark";
+      if (dark) root.setAttribute("data-mode", "dark"); else root.removeAttribute("data-mode");
+      try { localStorage.setItem("jl-mode", dark ? "dark" : "light"); } catch (e) {}
+      sync(btn);
+    });
+  });
+})();
+</script>
 
 <header class="head">
   <div class="wrap">
     <nav class="nav" aria-label="Sections">
-      <a class="brand" href="#top">Jiaxuan</a>
-      <div class="nav-links">
-        <a href="#highlights" class="opt">Highlights</a>
+      <a class="brand" href="#top"><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> Jiaxuan</a>
+      <div class="nav-links" id="nav-links">
+        <a href="#highlights">Highlights</a>
         <a href="#about">About</a>
         <a href="#cad">CAD</a>
         <a href="#photography">Photos</a>
-        <a href="#writing" class="opt">Writing</a>
+        <a href="#writing">Writing</a>
+        <a href="#video">Videos</a>
         <a href="#contact">Contact</a>
       </div>
+      <div class="more-wrap" id="more-wrap" hidden>
+        <button class="more-btn" id="more-btn" type="button" aria-expanded="false" aria-controls="more-panel">More
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="more-panel" id="more-panel"></div>
+      </div>
+      <button class="mode" id="mode" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Light / dark mode">
+        <span class="i-sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg></span>
+        <span class="i-moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a.6.6 0 0 0-.8-.7A9.5 9.5 0 1 0 21.2 15.4a.6.6 0 0 0-.7-.8z" fill="currentColor"/></svg></span>
+      </button>
     </nav>
   </div>
 </header>
@@ -360,12 +459,16 @@ section[id] { scroll-margin-top: 86px; }
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="wrap">
-      <span class="status rise"><i></i>Freshman at MIT · Mechanical Engineering</span>
-      <h1 class="rise d1">Jiaxuan Lin<svg class="heart"><use href="#heart"/></svg></h1>
+      <h1 class="rise">Jiaxuan Lin<img class="snor" src="img/snorlax.png" alt="" width="102" height="96"></h1>
+      <div class="profile rise d1">
+        <div class="p-row"><span class="p-k">Currently</span><span class="p-v"><b>Freshman at MIT</b></span></div>
+        <div class="p-row"><span class="p-k">Major<small>Intended</small></span><span class="p-v">Mechanical Engineering, concentration in Computing and Learning Machines</span></div>
+        <div class="p-row"><span class="p-k">Minor<small>Intended</small></span><span class="p-v">Computer Science &amp; Economics</span></div>
+      </div>
       <p class="lede rise d2">I design things in 3D, print and build them, and carry my camera everywhere to catch the <em>little details</em>. Also a proud parent of two rescue cats.</p>
       <div class="cta rise d3">
-        <a class="btn primary" href="#cad">See my work <span class="arr">→</span></a>
-        <a class="btn" href="#contact">Say hi</a>
+        <a class="btn primary" href="#cad">See My Work <span class="arr">→</span></a>
+        <a class="btn" href="#contact">Say Hi!</a>
       </div>
     </div>
     <div class="strip rise d4" aria-label="A few favorite images">
@@ -427,16 +530,12 @@ section[id] { scroll-margin-top: 86px; }
           <figcaption>
             <span class="chip"><b>Pickles</b> the gray one</span>
             <span class="chip"><b>George</b> the white &amp; black one</span>
-            <span class="chip"><svg class="heart"><use href="#heart"/></svg> both found in my backyard, a year apart</span>
+            <span class="chip"><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> both found in my backyard, a year apart</span>
           </figcaption>
         </figure>
         <div class="about-copy">
           <span class="eyebrow">About me</span>
-          <p class="intro" style="margin-top:10px">I love cats, music, and technology, and turning ideas into things I can <em>hold</em>.</p>
-          <p>I'm a freshman at MIT planning to study Mechanical Engineering with a concentration in Computer Science and Artificial Intelligence (Course 2-A6), with a double minor in Finance (15-3) and Economics (14).</p>
-          <p>I especially enjoy 3D design and modeling, like working with Autodesk Inventor and 3D printers.</p>
-          <p>In my free time I take photos. Buying a camera was one of the best risky investments I've made. It goes almost everywhere with me, and I'm always looking for overlooked details and hidden compositions.</p>
-          <p>This site is where I share my work: design and manufacturing, photography, and other creative projects. Thank you for stopping by :)</p>
+          <!-- About text goes here. Each paragraph: <p>Your text</p> -->
         </div>
       </div>
     </div>
@@ -447,7 +546,7 @@ section[id] { scroll-margin-top: 86px; }
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Computer-aided design</span>
-        <h2>Things I've <em>designed</em> and built</h2>
+        <h2>Things I've <em>Designed</em> &amp; Built</h2>
         <p>Modeled in Autodesk Inventor and AutoCAD. Some of them made it off the screen and into the real world. Tap any one to see it larger.</p>
       </div>
       <div class="group">
@@ -470,14 +569,15 @@ section[id] { scroll-margin-top: 86px; }
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Photography</span>
-        <h2>Through my <em>lens</em></h2>
-        <p>Shot on a Fujifilm X-T30 II and edited in Adobe Lightroom.</p>
+        <h2>Through My <em>Lens</em></h2>
+        <p>Shot on Fujifilm XT30 ii. Edited in Adobe Lightroom.</p>
       </div>
       <div class="photo-top">
         <p class="quote">"To capture and acknowledge the little things in life."</p>
         <div class="seg" role="tablist" aria-label="Photo series" id="tabs"><span class="seg-ind" id="seg-ind"></span></div>
       </div>
       <div class="gallery" id="gallery" role="tabpanel"></div>
+      <div class="more" id="more" aria-label="Switch photo series"></div>
     </div>
   </section>
 
@@ -486,20 +586,18 @@ section[id] { scroll-margin-top: 86px; }
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Writing</span>
-        <h2>Articles &amp; <em>reports</em></h2>
+        <h2>Articles &amp; <em>Reports</em></h2>
         <p>Pieces for Tech Times and my M3 Challenge papers.</p>
       </div>
       <ul class="rows">
-        <li><a href="https://drive.google.com/open?id=1eZD_aQH625YsbOfoUvWKT-ONDBPuLS1PiSWBD0Lt0_w" target="_blank" rel="noopener">
-          <span class="k">Tech Times · STEM</span><span class="t">AI Resource Consumption</span><span class="go" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://drive.google.com/file/d/1rdBRqN2_Cumk-5Z-yu2oW_ZKsXLvhAFW/view" target="_blank" rel="noopener">
+          <span class="k">M3 Challenge · Top 17%</span><span class="t">M3 2026 Math Challenge Report</span><span class="go" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://drive.google.com/file/d/17trVlA8zza9Q1kyWgT0UgiALd9tOJ5jz/view" target="_blank" rel="noopener">
+          <span class="k">M3 Challenge · Top 17%</span><span class="t">M3 2025 Math Challenge Report</span><span class="go" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://drive.google.com/open?id=1Jq_5SBVO13wa0arTb-8Y-V4sCoP0xpN1ehgUz1CJEq4" target="_blank" rel="noopener">
+          <span class="k">Tech Times · Real-world events</span><span class="t">Subway Surfing in NYC</span><span class="go" aria-hidden="true">↗</span></a></li>
         <li><a href="https://drive.google.com/open?id=1dtu7ZQ93IgW-o5Xm2JncMvew89UAWGnoAsmWHKRyXUI" target="_blank" rel="noopener">
           <span class="k">Tech Times · Real-world events</span><span class="t">Social Media and Nepal</span><span class="go" aria-hidden="true">↗</span></a></li>
-        <li><a href="https://drive.google.com/open?id=1Jq_5SBVO13wa0arTb-8Y-V4sCoP0xpN1ehgUz1CJEq4" target="_blank" rel="noopener">
-          <span class="k">Tech Times · Real-world events</span><span class="t">Subway Surfing</span><span class="go" aria-hidden="true">↗</span></a></li>
-        <li><a href="https://drive.google.com/file/d/1rdBRqN2_Cumk-5Z-yu2oW_ZKsXLvhAFW/view" target="_blank" rel="noopener">
-          <span class="k">M3 Challenge 2026 · Top 17%</span><span class="t">M3 Math Challenge Report</span><span class="go" aria-hidden="true">↗</span></a></li>
-        <li><a href="https://drive.google.com/file/d/17trVlA8zza9Q1kyWgT0UgiALd9tOJ5jz/view" target="_blank" rel="noopener">
-          <span class="k">M3 Challenge 2025 · Top 17%</span><span class="t">M3 Math Challenge Report</span><span class="go" aria-hidden="true">↗</span></a></li>
       </ul>
       <p class="note">A few older articles, on 3D printing and recycling, got lost along the way.</p>
     </div>
@@ -510,21 +608,17 @@ section[id] { scroll-margin-top: 86px; }
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">Video</span>
-        <h2>Little <em>films</em></h2>
+        <h2>Little <em>Films</em></h2>
         <p>Shot and edited in Adobe Premiere Pro.</p>
       </div>
       <div class="videos">
-        <a class="vid" href="https://drive.google.com/file/d/1SNwmfaHtLdIsaY3Q_O6VFmNJDsucfTYm/view" target="_blank" rel="noopener">
-          <div class="screen"><span class="play"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3.2c0-.8.9-1.3 1.6-.9l10.6 6.8c.6.4.6 1.4 0 1.8L6.6 17.7c-.7.4-1.6-.1-1.6-.9z" fill="currentColor"/></svg></span><span class="file">Educated Trailer.mp4</span></div>
-          <div class="body"><span class="k">AP Lang · Movie trailer</span><h3>Educated</h3><p>A trailer for Tara Westover's memoir.</p></div>
-        </a>
-        <a class="vid" href="https://drive.google.com/file/d/1SMUUpGUUFwr40qTjgMazx2cwsuj-HF9a/view" target="_blank" rel="noopener">
-          <div class="screen"><span class="play"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3.2c0-.8.9-1.3 1.6-.9l10.6 6.8c.6.4.6 1.4 0 1.8L6.6 17.7c-.7.4-1.6-.1-1.6-.9z" fill="currentColor"/></svg></span><span class="file">The Lazy Song Chester's Version.mp4</span></div>
-          <div class="body"><span class="k">AP Calc BC · Song parody</span><h3>The Lazy (Calc BC) Song</h3><p>A calculus take on Bruno Mars's "The Lazy Song".</p></div>
-        </a>
         <a class="vid" href="https://drive.google.com/file/d/1AaJ5X_MJKzZkWYWya0tKCzRyprNR2zx0/view" target="_blank" rel="noopener">
           <div class="screen"><span class="play"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3.2c0-.8.9-1.3 1.6-.9l10.6 6.8c.6.4.6 1.4 0 1.8L6.6 17.7c-.7.4-1.6-.1-1.6-.9z" fill="currentColor"/></svg></span><span class="file">congratulations siths co2025.mp4</span></div>
           <div class="body"><span class="k">High school graduation</span><h3>Congratulations, Class of 2025</h3><p>A send-off for my graduating class.</p></div>
+        </a>
+        <a class="vid" href="https://drive.google.com/file/d/1SNwmfaHtLdIsaY3Q_O6VFmNJDsucfTYm/view" target="_blank" rel="noopener">
+          <div class="screen"><span class="play"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3.2c0-.8.9-1.3 1.6-.9l10.6 6.8c.6.4.6 1.4 0 1.8L6.6 17.7c-.7.4-1.6-.1-1.6-.9z" fill="currentColor"/></svg></span><span class="file">Educated Trailer.mp4</span></div>
+          <div class="body"><span class="k">AP Lang · Movie trailer</span><h3>Educated</h3><p>A trailer for Tara Westover's memoir.</p></div>
         </a>
       </div>
     </div>
@@ -534,9 +628,9 @@ section[id] { scroll-margin-top: 86px; }
   <section class="sec contact" id="contact">
     <div class="wrap">
       <div class="hello">
-        <span class="eyebrow">Contact</span>
-        <h2>Let's <em>connect</em></h2>
-        <p>Thanks for stopping by. I'd love to hear from you.</p>
+        <span class="eyebrow">Contacts</span>
+        <h2>Let's <em>Connect!</em></h2>
+        <p>Feel free to message me for anything!</p>
         <div class="mail-row">
           <span class="mail" id="email">08linjiaxuan@gmail.com</span>
           <button class="btn primary" id="copy" type="button">Copy email</button>
@@ -544,6 +638,7 @@ section[id] { scroll-margin-top: 86px; }
         <div class="links">
           <a class="link" href="https://www.linkedin.com/in/jiaxuan-lin-b0a2072a2" target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
           <a class="link" href="https://www.instagram.com/bigfartlover/" target="_blank" rel="noopener">Instagram <span class="arr">↗</span></a>
+          <a class="link" href="https://github.com/jiaxuan-lin" target="_blank" rel="noopener">GitHub <span class="arr">↗</span></a>
         </div>
       </div>
     </div>
@@ -553,7 +648,7 @@ section[id] { scroll-margin-top: 86px; }
 <footer class="foot">
   <div class="wrap">
     <span>© <span id="yr">2026</span> Jiaxuan Lin</span>
-    <span>Made with <svg class="heart"><use href="#heart"/></svg> · Thanks for visiting</span>
+    <span><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> Thanks for visiting</span>
   </div>
 </footer>
 
@@ -573,7 +668,9 @@ section[id] { scroll-margin-top: 86px; }
 <script>
 (function () {
   /* Image sizes, generated from the files in img/ */
-  var DIMS = {"cad-00":[1400,786],"cad-01":[1086,610],"cad-02":[857,481],"cad-03":[1366,767],"cad-04":[1160,652],"cad-05":[854,480],"cad-06":[1071,601],"cad-07":[978,549],"cad-08":[1400,786],"cad-09":[1282,720],"cad-10":[834,468],"cad-11":[1400,786],"cad-12":[1259,707],"cad-13":[1170,657],"cad-14":[1400,934],"cad-15":[1400,934],"cad-16":[1400,934],"cad-17":[1400,934],"cad-18":[1280,719],"cad-19":[1102,666],"city-00":[1280,854],"city-01":[1400,932],"city-02":[1400,932],"city-03":[1400,933],"city-04":[1400,933],"city-05":[1400,932],"city-06":[1400,932],"city-07":[1400,933],"city-08":[1400,933],"city-09":[1400,933],"city-10":[1400,933],"city-11":[1400,932],"city-12":[1400,933],"city-13":[1400,933],"city-14":[1400,933],"city-15":[1400,933],"city-16":[1400,932],"city-17":[1400,933],"city-18":[1400,933],"city-19":[1400,933],"city-20":[1400,933],"city-21":[1400,932],"city-22":[1400,933],"city-23":[1400,933],"city-24":[1400,933],"city-25":[1400,933],"city-26":[1400,933],"city-27":[1400,933],"city-28":[1400,932],"city-29":[1400,932],"city-30":[1400,933],"city-31":[1400,933],"city-32":[1400,933],"city-33":[1400,933],"city-34":[1400,933],"city-35":[1400,933],"city-36":[1400,933],"city-37":[1400,933],"city-38":[1280,854],"city-39":[1400,933],"city-40":[1280,854],"city-41":[1400,933],"city-42":[1400,933],"city-43":[1400,933],"city-44":[1400,933],"city-45":[1400,933],"city-46":[1400,933],"city-47":[1400,933],"city-48":[1280,853],"city-49":[1400,933],"city-50":[1400,933],"city-51":[1400,933],"city-52":[1400,933],"city-53":[1400,933],"city-54":[1144,763],"city-55":[1400,933],"city-56":[933,1400],"city-57":[933,1400],"city-58":[933,1400],"city-59":[933,1400],"city-60":[933,1400],"city-61":[933,1400],"city-62":[933,1400],"city-63":[933,1400],"city-64":[933,1400],"city-65":[933,1400],"city-66":[933,1400],"city-67":[933,1400],"city-68":[933,1400],"city-69":[933,1400],"city-70":[933,1400],"city-71":[933,1400],"city-72":[933,1400],"city-73":[933,1400],"city-74":[933,1400],"city-75":[933,1400],"city-76":[933,1400],"city-77":[933,1400],"city-78":[933,1400],"city-79":[933,1400],"city-80":[933,1400],"city-81":[933,1400],"city-82":[933,1400],"city-83":[933,1400],"city-84":[933,1400],"city-85":[933,1400],"city-86":[933,1400],"city-87":[933,1400],"creative-00":[1400,933],"creative-01":[1400,933],"creative-02":[933,1400],"creative-03":[933,1400],"home-00":[1400,1315],"home-01":[1400,934],"home-02":[1400,933],"nature-00":[1280,854],"nature-01":[1400,933],"nature-02":[1280,853],"nature-03":[1400,932],"nature-04":[1280,854],"nature-05":[1400,933],"nature-06":[1400,933],"nature-07":[1400,933],"nature-08":[1280,853],"nature-09":[1400,933],"nature-10":[1400,933],"nature-11":[1400,933],"nature-12":[1280,854],"nature-13":[1400,933],"nature-14":[1400,933],"nature-15":[1400,933],"nature-16":[933,1400],"nature-17":[933,1400],"nature-18":[933,1400],"nature-19":[933,1400],"nature-20":[933,1400],"nature-21":[933,1400],"nature-22":[933,1400],"people-00":[1400,933],"people-01":[1400,933],"people-02":[1400,933],"people-03":[1280,854],"people-04":[1400,933],"people-05":[1400,933],"people-06":[1400,933],"people-07":[1400,933],"people-08":[1400,933],"people-09":[1400,933],"people-10":[1400,933],"people-11":[1400,933],"people-12":[1400,933],"people-13":[1400,933],"people-14":[1400,933],"people-15":[1400,932],"shows-00":[933,1400],"shows-01":[1400,933],"shows-02":[1400,933],"shows-03":[933,1400],"shows-04":[933,1400],"shows-05":[1400,933],"shows-06":[1400,933],"shows-07":[933,1400],"shows-08":[933,1400],"shows-09":[933,1400],"shows-10":[933,1400],"shows-11":[933,1400],"shows-12":[1400,933],"shows-13":[1400,933],"shows-14":[1400,933],"shows-15":[933,1400],"shows-16":[1400,933],"shows-17":[1400,933],"shows-18":[1400,933],"shows-19":[933,1400]};
+  var DIMS = {"cad-00":[1400,786],"cad-01":[1086,610],"cad-02":[857,481],"cad-03":[1366,767],"cad-04":[1160,652],"cad-05":[854,480],"cad-06":[1071,601],"cad-07":[978,549],"cad-08":[1400,786],"cad-09":[1282,720],"cad-10":[834,468],"cad-11":[1400,786],"cad-12":[1259,707],"cad-13":[1170,657],"cad-14":[1400,934],"cad-15":[1400,934],"cad-16":[1400,934],"cad-17":[1400,934],"cad-18":[1280,719],"cad-19":[1102,666],"city-00":[1280,854],"city-01":[1400,932],"city-02":[1400,932],"city-03":[1400,933],"city-04":[1400,933],"city-05":[1400,932],"city-06":[1400,932],"city-07":[1400,933],"city-08":[1400,933],"city-09":[1400,933],"city-10":[1400,933],"city-11":[1400,932],"city-12":[1400,933],"city-13":[1400,933],"city-14":[1400,933],"city-15":[1400,933],"city-16":[1400,932],"city-17":[1400,933],"city-18":[1400,933],"city-19":[1400,933],"city-20":[1400,933],"city-21":[1400,932],"city-22":[1400,933],"city-23":[1400,933],"city-24":[1400,933],"city-25":[1400,933],"city-26":[1400,933],"city-27":[1400,933],"city-28":[1400,932],"city-29":[1400,932],"city-30":[1400,933],"city-31":[1400,933],"city-32":[1400,933],"city-33":[1400,933],"city-34":[1400,933],"city-35":[1400,933],"city-36":[1400,933],"city-37":[1400,933],"city-38":[1280,854],"city-39":[1400,933],"city-40":[1280,854],"city-41":[1400,933],"city-42":[1400,933],"city-43":[1400,933],"city-44":[1400,933],"city-45":[1400,933],"city-46":[1400,933],"city-47":[1400,933],"city-48":[1280,853],"city-49":[1400,933],"city-50":[1400,933],"city-51":[1400,933],"city-52":[1400,933],"city-53":[1400,933],"city-54":[1144,763],"city-55":[1400,933],"city-56":[933,1400],"city-57":[933,1400],"city-58":[933,1400],"city-59":[933,1400],"city-60":[933,1400],"city-61":[933,1400],"city-62":[933,1400],"city-63":[933,1400],"city-64":[933,1400],"city-65":[933,1400],"city-66":[933,1400],"city-67":[933,1400],"city-68":[933,1400],"city-69":[933,1400],"city-70":[933,1400],"city-71":[933,1400],"city-72":[933,1400],"city-73":[933,1400],"city-74":[933,1400],"city-75":[933,1400],"city-76":[933,1400],"city-77":[933,1400],"city-78":[933,1400],"city-79":[933,1400],"city-80":[933,1400],"city-81":[933,1400],"city-82":[933,1400],"city-83":[933,1400],"city-84":[933,1400],"city-85":[933,1400],"city-86":[933,1400],"city-87":[933,1400],"creative-00":[1400,933],"creative-01":[1400,933],"creative-02":[933,1400],"creative-03":[933,1400],"home-00":[1400,1315],"home-01":[1400,934],"home-02":[1400,933],"nature-00":[1280,854],"nature-01":[1400,933],"nature-02":[1280,853],"nature-03":[1400,932],"nature-04":[1280,854],"nature-05":[1400,933],"nature-06":[1400,933],"nature-07":[1400,933],"nature-08":[1280,853],"nature-09":[1400,933],"nature-10":[1400,933],"nature-11":[1400,933],"nature-12":[1280,854],"nature-13":[1400,933],"nature-14":[1400,933],"nature-15":[1400,933],"nature-16":[933,1400],"nature-17":[933,1400],"nature-18":[933,1400],"nature-19":[933,1400],"nature-20":[933,1400],"nature-21":[933,1400],"nature-22":[933,1400],"people-00":[1400,933],"people-01":[1400,933],"people-02":[1400,933],"people-03":[1280,854],"people-04":[1400,933],"people-05":[1400,933],"people-06":[1400,933],"people-07":[1400,933],"people-08":[1400,933],"people-09":[1400,933],"people-10":[1400,933],"people-11":[1400,933],"people-12":[1400,933],"people-13":[1400,933],"people-14":[1400,933],"people-15":[1400,932],"shows-00":[933,1400],"shows-01":[1400,933],"shows-02":[1400,933],"shows-03":[933,1400],"shows-04":[933,1400],"shows-05":[1400,933],"shows-06":[1400,933],"shows-08":[933,1400],"shows-09":[933,1400],"shows-10":[933,1400],"shows-11":[933,1400],"shows-12":[1400,933],"shows-13":[1400,933],"shows-14":[1400,933],"shows-15":[933,1400],"shows-16":[1400,933],"shows-17":[1400,933],"shows-18":[1400,933],"shows-19":[933,1400]};
+  /* Photo order inside each series, sorted by average color so neighbors blend (made by color_order.py) */
+  var ORDER = {"shows":["shows-05","shows-08","shows-00","shows-10","shows-09","shows-02","shows-01","shows-11","shows-06","shows-15","shows-17","shows-12","shows-13","shows-14","shows-18","shows-19","shows-04","shows-03","shows-16"],"city":["city-17","city-87","city-73","city-33","city-38","city-35","city-07","city-61","city-52","city-85","city-70","city-83","city-79","city-65","city-60","city-09","city-10","city-08","city-74","city-66","city-78","city-69","city-53","city-84","city-76","city-67","city-06","city-23","city-57","city-77","city-82","city-56","city-62","city-81","city-72","city-25","city-39","city-00","city-16","city-37","city-22","city-80","city-55","city-68","city-40","city-41","city-02","city-36","city-54","city-32","city-75","city-29","city-12","city-15","city-59","city-20","city-19","city-28","city-18","city-05","city-01","city-48","city-51","city-86","city-30","city-14","city-49","city-44","city-46","city-42","city-45","city-58","city-47","city-50","city-64","city-31","city-03","city-13","city-21","city-43","city-11","city-04","city-26","city-34","city-71","city-24","city-63","city-27"],"nature":["nature-22","nature-04","nature-07","nature-19","nature-01","nature-02","nature-08","nature-10","nature-14","nature-18","nature-15","nature-20","nature-16","nature-12","nature-09","nature-06","nature-21","nature-17","nature-13","nature-11","nature-05","nature-03","nature-00"],"people":["people-10","people-09","people-05","people-13","people-07","people-14","people-08","people-06","people-03","people-12","people-01","people-11","people-04","people-00","people-15","people-02"],"creative":["creative-01","creative-03","creative-00","creative-02"]};
 
   var CAD = [
     ["cad-00", "Camaro Model", "model"],
@@ -599,8 +696,8 @@ section[id] { scroll-margin-top: 86px; }
   ];
   var TAG = { model: "Inventor", made: "Made", plan: "AutoCAD" };
   var SERIES = [
-    { id: "city", name: "City" }, { id: "nature", name: "Nature" },
-    { id: "people", name: "People" }, { id: "shows", name: "Shows" }, { id: "creative", name: "Creative" }
+    { id: "shows", name: "Shows" }, { id: "city", name: "City" }, { id: "nature", name: "Nature" },
+    { id: "people", name: "People" }, { id: "creative", name: "Creative" }
   ];
   var NOTES = {
     "city-12": ["Koreatown", "f/4.4 · 1/250s · ISO 12800"],
@@ -610,6 +707,12 @@ section[id] { scroll-margin-top: 86px; }
                "city-56", "creative-01", "cad-15", "city-19", "nature-09", "people-04", "city-74", "cad-04", "nature-20"];
 
   function list(prefix) { return Object.keys(DIMS).filter(function (k) { return k.indexOf(prefix + "-") === 0; }).sort(); }
+  function ordered(sid) {
+    var all = list(sid), seen = {}, out = [];
+    (ORDER[sid] || []).forEach(function (id) { if (DIMS[id] && !seen[id]) { seen[id] = 1; out.push(id); } });
+    all.forEach(function (id) { if (!seen[id]) out.push(id); });
+    return out;
+  }
   function el(tag, cls) { var e = document.createElement(tag); if (cls) e.className = cls; return e; }
   function sized(img, id) { if (DIMS[id]) { img.width = DIMS[id][0]; img.height = DIMS[id][1]; } }
   function cadTitle(id) { var r = CAD.filter(function (x) { return x[0] === id; })[0]; return r ? r[1] : null; }
@@ -699,14 +802,28 @@ section[id] { scroll-margin-top: 86px; }
     ind.style.width = active.offsetWidth + "px";
     ind.style.transform = "translateX(" + (active.offsetLeft) + "px)";
   }
+  var placed = [], cols = 0;
+  function colCount() { var w = gallery.clientWidth || window.innerWidth; return w >= 860 ? 3 : (w >= 500 ? 2 : 1); }
+  /* Fill columns left to right, always into the shortest one, so the color order reads top to bottom */
+  function layout() {
+    cols = colCount();
+    var colEls = [], heights = [];
+    gallery.innerHTML = "";
+    for (var c = 0; c < cols; c++) { var ce = el("div", "gcol"); gallery.appendChild(ce); colEls.push(ce); heights.push(0); }
+    placed.forEach(function (p) {
+      var k = 0; for (var c2 = 1; c2 < cols; c2++) if (heights[c2] < heights[k] - 0.02) k = c2;
+      colEls[k].appendChild(p.el); heights[k] += p.ratio;
+    });
+  }
+  window.addEventListener("resize", function () { if (placed.length && colCount() !== cols) layout(); });
   function renderSeries(sid, animate) {
-    var ids = list(sid);
+    var ids = ordered(sid);
     var name = SERIES.filter(function (s) { return s.id === sid; })[0].name;
     var items = ids.map(function (id) {
       var n = NOTES[id];
       return { id: id, title: n ? n[0] : name, sub: n ? n[1] : "Fujifilm X-T30 II · Lightroom", group: name };
     });
-    gallery.innerHTML = "";
+    placed = [];
     ids.forEach(function (id, i) {
       var b = el("button", "ph"); b.type = "button";
       b.setAttribute("aria-label", "Open " + (NOTES[id] ? NOTES[id][0] : name + " photo " + (i + 1)));
@@ -714,7 +831,26 @@ section[id] { scroll-margin-top: 86px; }
       b.appendChild(img);
       if (NOTES[id]) { var x = el("span", "exif"); x.textContent = NOTES[id][0]; b.appendChild(x); }
       b.addEventListener("click", function () { open(items, i); });
-      gallery.appendChild(b);
+      placed.push({ el: b, ratio: DIMS[id] ? DIMS[id][1] / DIMS[id][0] : 1 });
+    });
+    layout();
+    /* Buttons under the photos to jump to another series */
+    var more = document.getElementById("more"), k = SERIES.map(function (x) { return x.id; }).indexOf(sid);
+    var nextId = SERIES[(k + 1) % SERIES.length].id;
+    more.innerHTML = "";
+    var lbl = el("span", "more-lbl"); lbl.textContent = "That's all for " + name + ". Keep browsing:"; more.appendChild(lbl);
+    SERIES.forEach(function (s2) {
+      if (s2.id === sid) return;
+      var isNext = s2.id === nextId;
+      var mb = el("button", isNext ? "btn primary" : "btn"); mb.type = "button";
+      mb.textContent = isNext ? "Next: " + s2.name + " " : s2.name;
+      if (isNext) { var ar = el("span", "arr"); ar.textContent = "→"; mb.appendChild(ar); }
+      mb.addEventListener("click", function () {
+        renderSeries(s2.id, true);
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        document.getElementById("photography").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+      });
+      more.appendChild(mb);
     });
     if (animate) { gallery.classList.remove("swap"); void gallery.offsetWidth; gallery.classList.add("swap"); }
     Array.prototype.forEach.call(tabs.querySelectorAll(".tab"), function (t) {
@@ -723,7 +859,7 @@ section[id] { scroll-margin-top: 86px; }
       if (on) active = t;
     });
     moveInd();
-    try { localStorage.setItem("jl-series", sid); } catch (e) {}
+    try { localStorage.setItem("jl-series-v2", sid); } catch (e) {}
   }
   SERIES.forEach(function (s) {
     var n = list(s.id).length; total += n;
@@ -740,19 +876,54 @@ section[id] { scroll-margin-top: 86px; }
     tabs.appendChild(t);
   });
   document.getElementById("photo-count").textContent = total;
-  var start = "city";
-  try { var saved = localStorage.getItem("jl-series"); if (saved && list(saved).length) start = saved; } catch (e) {}
+  var start = SERIES[0].id;
+  try { var saved = localStorage.getItem("jl-series-v2"); if (saved && list(saved).length) start = saved; } catch (e) {}
   renderSeries(start, false);
   window.addEventListener("resize", moveInd);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
 
+  /* ---------- Nav: fold links that don't fit into "More" ---------- */
+  var nav = document.querySelector(".nav"), navBar = document.getElementById("nav-links"),
+      moreWrap = document.getElementById("more-wrap"), moreBtn = document.getElementById("more-btn"),
+      morePanel = document.getElementById("more-panel");
+  var allNav = Array.prototype.slice.call(navBar.querySelectorAll("a"));
+  var FOLD_FIRST = ["#video", "#writing", "#photography", "#highlights", "#contact", "#about", "#cad"];
+  function setMore(open) {
+    moreWrap.classList.toggle("open", open);
+    moreBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  function syncMoreCurrent() { moreBtn.classList.toggle("has-current", !!morePanel.querySelector('[aria-current="true"]')); }
+  function fits() { return nav.scrollWidth <= nav.clientWidth + 1; }
+  function arrange() {
+    setMore(false);
+    allNav.forEach(function (a) { navBar.appendChild(a); });
+    moreWrap.hidden = true;
+    var folded = [];
+    for (var i = 0; i < FOLD_FIRST.length && !fits(); i++) {
+      moreWrap.hidden = false;
+      folded.push(FOLD_FIRST[i]);
+      morePanel.innerHTML = "";
+      allNav.forEach(function (a) { if (folded.indexOf(a.getAttribute("href")) > -1) morePanel.appendChild(a); });
+    }
+    syncMoreCurrent();
+  }
+  var raf = 0;
+  window.addEventListener("resize", function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(arrange); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(arrange);
+  arrange();
+  moreBtn.addEventListener("click", function (e) { e.stopPropagation(); setMore(!moreWrap.classList.contains("open")); });
+  allNav.forEach(function (a) { a.addEventListener("click", function () { setMore(false); }); });
+  document.addEventListener("click", function (e) { if (!moreWrap.contains(e.target)) setMore(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && moreWrap.classList.contains("open")) { setMore(false); moreBtn.focus(); } });
+
   /* ---------- Nav: highlight the section in view ---------- */
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+  var navLinks = allNav;
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
         navLinks.forEach(function (a) { a.setAttribute("aria-current", a.getAttribute("href") === "#" + en.target.id ? "true" : "false"); });
+        syncMoreCurrent();
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
     document.querySelectorAll("main section[id]").forEach(function (s) { io.observe(s); });
