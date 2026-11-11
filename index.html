@@ -261,6 +261,7 @@ section[id] { scroll-margin-top: 86px; }
 .about-copy p { margin: 0 0 1em; max-width: 36rem; color: var(--muted); }
 .about-copy p.intro { font-family: var(--serif); font-size: clamp(1.375rem, 2.6vw, 1.75rem); line-height: 1.35; color: var(--ink); letter-spacing: -.01em; }
 .about-copy p.intro em { color: var(--accent); }
+.about-copy p.story + p.story { margin-top: 0; }
 .about-copy p.story { margin-top: 12px; font-size: clamp(1.125rem, 2vw, 1.3125rem); line-height: 1.65; color: var(--ink); }
 
 /* ---------- CAD ---------- */
@@ -374,6 +375,26 @@ section[id] { scroll-margin-top: 86px; }
 .mail-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; }
 .mail { background: var(--surface); border: 1px solid var(--line); padding: 10px 18px; border-radius: 999px; font-weight: 600; user-select: all; overflow-wrap: anywhere; min-width: 0; }
 .hello .links { justify-content: center; }
+.msg {
+  max-width: 38rem; margin: 36px auto 0; padding: clamp(20px, 3vw, 28px); text-align: left;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow);
+  display: grid; gap: 14px;
+}
+.msg h3 { font-family: var(--serif); font-weight: 500; font-size: 1.375rem; margin: 0 0 2px; }
+.msg-row { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 600px) { .msg-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.msg label { display: grid; gap: 6px; font-size: .8125rem; font-weight: 600; color: var(--muted); min-width: 0; }
+.msg input, .msg textarea {
+  font: inherit; font-size: 1rem; font-weight: 400; color: var(--ink); width: 100%;
+  padding: 11px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg);
+  transition: border-color .2s, box-shadow .2s;
+}
+.msg textarea { resize: vertical; min-height: 120px; }
+.msg input:focus, .msg textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--soft); }
+.msg .bad { border-color: #c0544f; }
+.msg-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.msg-status { margin: 0; font-size: .875rem; color: var(--muted); flex: 1 1 14rem; }
+.msg-status.ok { color: var(--accent); font-weight: 600; }
 
 .foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding-block: 8px 32px; color: var(--muted); font-size: .875rem; }
 
@@ -406,6 +427,23 @@ section[id] { scroll-margin-top: 86px; }
 .lb-prev { left: max(16px, env(safe-area-inset-left, 0px)); }
 .lb-next { right: max(16px, env(safe-area-inset-right, 0px)); }
 @media (max-width: 640px) { .lb-prev, .lb-next { top: auto; bottom: 8px; margin-top: 0; } }
+.rv[open] { grid-template-rows: auto minmax(0, 1fr); }
+.rv-bar { opacity: 1; flex-wrap: wrap; }
+.rv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.rv-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: #fff;
+  font-size: .875rem; font-weight: 600; padding: 10px 16px; border-radius: 999px;
+  background: rgba(255, 255, 255, .12); transition: background .2s;
+}
+.rv-btn:hover { background: rgba(255, 255, 255, .24); }
+.rv-stage {
+  overflow-y: auto; min-height: 0; -webkit-overflow-scrolling: touch;
+  padding: 4px max(16px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.rv-stage img {
+  display: block; width: 100%; max-width: 880px; height: auto; margin: 0 auto;
+  background: #fff; border-radius: 10px; box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .6);
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -477,12 +515,11 @@ section[id] { scroll-margin-top: 86px; }
         <div class="p-row"><span class="p-k">Major<small>Intended</small></span><span class="p-v">Mechanical Engineering<small class="p-sub">Concentration in Computing and Learning Machines</small></span></div>
         <div class="p-row"><span class="p-k">Minor<small>Intended</small></span><span class="p-v">Computer Science &amp; Economics</span></div>
       </div>
-      <p class="lede rise d2">Student who enjoys designs in CAD, building with AI and code, explore creative outlets, taking care of cats, and making things people can use(:</p>
+      <p class="lede rise d2">Student who enjoys designing in CAD, building with AI and code, and making things people can use. Also takes care of two cats (:</p>
       <div class="cta rise d3">
         <a class="btn primary" href="#cad">See My Work <span class="arr">→</span></a>
         <a class="btn" href="#contact">Say Hi!</a>
-        <!-- Resume: add href="your-resume.pdf" target="_blank" when it's ready -->
-        <a class="btn" id="resume-btn">Resume <svg viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><path d="M7 3h7l5 5v13H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
+        <button class="btn" id="resume-btn" type="button" aria-haspopup="dialog">Resume <svg viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><path d="M7 3h7l5 5v13H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
       </div>
     </div>
     <div class="strip rise d4" aria-label="A few favorite images">
@@ -549,7 +586,9 @@ section[id] { scroll-margin-top: 86px; }
         </figure>
         <div class="about-copy">
           <span class="eyebrow">About me</span>
-          <p class="story">Hello! My name is Jiaxuan, and aside from being a video game fanatic back in 6th grade, I actually started my interest in making 3D things, even running a tiny online business selling models and renders. A CAD class in my sophomore year of high school turned that into engineering, and I've been exploring technology ever since! Currently, I'm on MIT's Solar Electric Vehicle Team working on improving the efficiency and aerodynamics of our car Solstice. I'm also currently pursuing personal projects, such as in photography, fabrication, and developing a game with the help of AI agents! I'm excited to continue developing my skillset and explore what there is to engineering! </p>
+          <p class="story">Hello! My name is Jiaxuan. Back in 6th grade I was a video game fanatic, and that’s also when I started making things in 3D. I even ran a tiny online business selling models and renders. A CAD class in my sophomore year of high school turned that interest into engineering, and I’ve been exploring technology ever since.</p>
+          <p class="story">Right now I’m on MIT’s Solar Electric Vehicle's Aerodynamics Team, working on improving the structure and efficiency of our car Solstice. On my own time I enjoy taking photos, building things, and I'm currently developing a game with the help of AI agents.</p>
+          <p class="story">I’m excited to keep building my skills and to see how far engineering can take me!</p>
         </div>
       </div>
     </div>
@@ -653,6 +692,19 @@ section[id] { scroll-margin-top: 86px; }
           <a class="link" href="https://www.linkedin.com/in/jiaxuanlin-mit2030/" target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
           <a class="link" href="https://github.com/jiaxuan-lin" target="_blank" rel="noopener">GitHub <span class="arr">↗</span></a>
         </div>
+        <form class="msg" id="msg-form" novalidate>
+          <h3>Send me a message</h3>
+          <div class="msg-row">
+            <label for="msg-name">Your name<input id="msg-name" name="name" type="text" autocomplete="name" required></label>
+            <label for="msg-email">Your email<input id="msg-email" name="email" type="email" autocomplete="email" required></label>
+          </div>
+          <label for="msg-subject">Subject<input id="msg-subject" name="subject" type="text" required></label>
+          <label for="msg-body">Message<textarea id="msg-body" name="message" rows="5" required></textarea></label>
+          <div class="msg-foot">
+            <button class="btn primary" type="submit" id="msg-send">Send message <span class="arr">→</span></button>
+            <p class="msg-status" id="msg-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -664,6 +716,20 @@ section[id] { scroll-margin-top: 86px; }
     <span><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> Thanks for visiting</span>
   </div>
 </footer>
+
+<dialog class="lb rv" id="rv" aria-label="Resume">
+  <div class="lb-bar rv-bar">
+    <span>Resume · Jiaxuan Lin</span>
+    <div class="rv-actions">
+      <a class="rv-btn" href="resume/Lin_Jiaxuan_Resume2026.pdf" target="_blank" rel="noopener">Open in new tab <span aria-hidden="true">↗</span></a>
+      <a class="rv-btn" id="rv-download" href="resume/Lin_Jiaxuan_Resume2026.pdf" download="Lin_Jiaxuan_Resume2026.pdf">Download <span aria-hidden="true">↓</span></a>
+      <button class="lb-btn" id="rv-close" type="button" aria-label="Close"><svg viewBox="0 0 20 20"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+  <div class="rv-stage" id="rv-stage">
+    <img src="resume/resume.png" alt="Jiaxuan Lin's resume" width="1700" height="2200" loading="lazy">
+  </div>
+</dialog>
 
 <dialog class="lb" id="lb" aria-label="Image viewer">
   <div class="lb-bar">
@@ -712,10 +778,7 @@ section[id] { scroll-margin-top: 86px; }
     { id: "shows", name: "Shows" }, { id: "city", name: "City" }, { id: "nature", name: "Nature" },
     { id: "people", name: "People" }, { id: "creative", name: "Creative" }
   ];
-  var NOTES = {
-    "city-12": ["Koreatown", "f/4.4 · 1/250s · ISO 12800"],
-    "creative-00": ["Cat Eye", "f/9.0 · 1/60s · 27mm · ISO 1600"]
-  };
+  var NOTES = {};  /* photo titles/labels removed; every photo shows just the camera line */
   var STRIP = ["city-02", "cad-00", "nature-01", "city-12", "people-14", "cad-12", "nature-07",
                "city-56", "creative-01", "cad-15", "city-19", "nature-09", "people-04", "city-74", "cad-04", "nature-20"];
 
@@ -773,13 +836,13 @@ section[id] { scroll-margin-top: 86px; }
     var n = NOTES[id], ct = cadTitle(id);
     var series = id.split("-")[0];
     var g = series === "cad" ? "CAD" : series.charAt(0).toUpperCase() + series.slice(1);
-    return { id: id, title: n ? n[0] : (ct || g), sub: n ? n[1] : (ct ? "Autodesk Inventor" : "Fujifilm X-T30 II · Lightroom"), group: "Favorites" };
+    return { id: id, title: ct || null, sub: ct ? "Autodesk Inventor" : "Fujifilm X-T30 II · Lightroom", group: "Favorites" };
   });
   [0, 1].forEach(function (pass) {
     stripItems.forEach(function (it, i) {
       var b = el("button"); b.type = "button";
       if (pass) { b.tabIndex = -1; b.setAttribute("aria-hidden", "true"); }
-      b.setAttribute("aria-label", "Open " + it.title);
+      b.setAttribute("aria-label", "Open " + (it.title || "photo"));
       var img = el("img"); img.src = "thumb/" + it.id + ".jpg"; img.alt = ""; img.decoding = "async"; sized(img, it.id);
       b.appendChild(img);
       b.addEventListener("click", function () { open(stripItems, i); });
@@ -834,7 +897,7 @@ section[id] { scroll-margin-top: 86px; }
     var name = SERIES.filter(function (s) { return s.id === sid; })[0].name;
     var items = ids.map(function (id) {
       var n = NOTES[id];
-      return { id: id, title: n ? n[0] : name, sub: n ? n[1] : "Fujifilm X-T30 II · Lightroom", group: name };
+      return { id: id, title: null, sub: "Fujifilm X-T30 II · Lightroom", group: name };
     });
     placed = [];
     ids.forEach(function (id, i) {
@@ -942,6 +1005,66 @@ section[id] { scroll-margin-top: 86px; }
     }, { rootMargin: "-45% 0px -50% 0px" });
     document.querySelectorAll("main section[id]").forEach(function (s) { io.observe(s); });
   }
+
+  /* ---------- Resume viewer ---------- */
+  var rv = document.getElementById("rv");
+  function openResume() {
+    document.getElementById("rv-stage").scrollTop = 0;
+    if (typeof rv.showModal === "function") { if (!rv.open) rv.showModal(); } else { rv.setAttribute("open", ""); }
+  }
+  function closeResume() { if (rv.open && typeof rv.close === "function") rv.close(); else rv.removeAttribute("open"); }
+  document.getElementById("resume-btn").addEventListener("click", openResume);
+  document.getElementById("rv-close").addEventListener("click", closeResume);
+  rv.addEventListener("click", function (e) { if (e.target === rv || e.target.id === "rv-stage") closeResume(); });
+  /* On your own hosting the Download link just works. Inside the claude.ai preview,
+     plain download links are blocked, so the save goes through the viewer's download prompt. */
+  var dl = document.getElementById("rv-download"), saver = null;
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("downloads").then(function (d) { saver = d; if (!d) dl.hidden = true; }, function () { dl.hidden = true; });
+  }
+  dl.addEventListener("click", function (e) {
+    if (!saver) return;
+    e.preventDefault();
+    fetch(dl.getAttribute("href"))
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.blob(); })
+      .then(function (b) { return saver.save({ filename: "Lin_Jiaxuan_Resume2026.pdf", data: b }); })
+      .catch(function () { /* declined or unavailable: nothing to do, "Open in new tab" still works */ });
+  });
+
+  /* ---------- Message form ----------
+     To have messages land straight in your inbox (no email app needed), make a free form at
+     formspree.io and paste its endpoint here, e.g. "https://formspree.io/f/abcdwxyz".
+     Left empty, the form opens the visitor's email app with everything filled in. */
+  var FORM_ENDPOINT = "https://formspree.io/f/xnpdqdzl";
+  var TO = "jiaxuan7@mit.edu";
+  var form = document.getElementById("msg-form"), status = document.getElementById("msg-status"),
+      sendBtn = document.getElementById("msg-send");
+  function say(text, ok) { status.textContent = text; status.classList.toggle("ok", !!ok); }
+  function openMail(d) {
+    var body = d.message + "\n\n— " + d.name + " (" + d.email + ")";
+    window.location.href = "mailto:" + TO + "?subject=" + encodeURIComponent(d.subject) + "&body=" + encodeURIComponent(body);
+    say("Your email app should open with this message ready to send. If it doesn't, email me at " + TO + ".");
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = form.elements, d = { name: f.name.value.trim(), email: f.email.value.trim(), subject: f.subject.value.trim(), message: f.message.value.trim() };
+    var missing = [];
+    [["name", f.name], ["email", f.email], ["subject", f.subject], ["message", f.message]].forEach(function (pair) {
+      var bad = !pair[1].value.trim() || (pair[0] === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pair[1].value.trim()));
+      pair[1].classList.toggle("bad", bad);
+      if (bad) missing.push(pair[0]);
+    });
+    if (missing.length) { say("Please fill in your " + missing.join(", ") + (missing.indexOf("email") > -1 ? " (a valid email address)" : "") + "."); return; }
+    if (!FORM_ENDPOINT) { openMail(d); return; }
+    sendBtn.disabled = true; say("Sending…");
+    var fd = new FormData(form);
+    fd.append("_subject", "Portfolio message: " + d.subject);  /* becomes the subject line of the email you get */
+    fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: fd })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); form.reset(); say("Sent! Thanks for reaching out. I'll get back to you soon.", true); })
+      .catch(function () { say("That didn't go through, so I'm opening your email app instead."); openMail(d); })
+      .then(function () { sendBtn.disabled = false; });
+  });
+  form.addEventListener("input", function (e) { e.target.classList.remove("bad"); });
 
   /* ---------- Misc ---------- */
   document.getElementById("yr").textContent = new Date().getFullYear();
