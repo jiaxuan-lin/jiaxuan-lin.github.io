@@ -299,6 +299,17 @@ section[id] { scroll-margin-top: 86px; }
 .plan .tile img { aspect-ratio: auto; object-fit: contain; }
 
 /* ---------- Creative coding ---------- */
+.proj { display: grid; gap: 0; padding: 0; overflow: hidden; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .proj { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
+.proj-shot { display: block; overflow: hidden; background: #0d0b1f; }
+.proj-shot img { width: 100%; height: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .7s cubic-bezier(.2,.8,.2,1); }
+.proj:hover .proj-shot img { transform: scale(1.03); }
+.proj-body { display: grid; gap: 6px; align-content: center; padding: clamp(20px, 3vw, 32px); }
+.proj-body .k { font-size: .8125rem; color: var(--accent); font-weight: 600; }
+.proj-body h3 { margin: 0; }
+.proj-body p { margin: 0; }
+.proj-body .proj-note { font-size: .875rem; }
+.proj-body .links { margin-top: 10px; }
 .sketches { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
 .sketch { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .sketch-stage {
@@ -658,8 +669,27 @@ section[id] { scroll-margin-top: 86px; }
       <div class="sec-head">
         <span class="eyebrow">Creative coding</span>
         <h2>Playing With <em>Code</em></h2>
-        <p>Small interactive sketches I wrote in JavaScript with p5.js. They run right here, so give them a try!</p>
+        <p>Interactive things I've made, from a webcam effects app to small p5.js sketches that run right here.</p>
       </div>
+      <div class="group">
+        <div class="group-head"><h3>Web apps</h3><span>Interactive browser projects</span></div>
+        <article class="card proj">
+          <a class="proj-shot" href="https://jiaxuan-lin.github.io/gesture-fx/" target="_blank" rel="noopener" aria-label="Open Gesture FX">
+            <img src="img/project-gesture-fx.jpg" alt="Gesture FX start screen" width="800" height="500" loading="lazy">
+          </a>
+          <div class="proj-body">
+            <span class="k">Web app · Hand &amp; face tracking</span>
+            <h3>Gesture FX</h3>
+            <p>Camera effects you control with your hands and face. Frame a shape with both hands to filter it, snap your fingers to switch filters, blow to fog up the screen, then write in the fog with your finger or wipe it away with your palm.</p>
+            <p class="proj-note">Runs entirely in your browser, so your camera and mic never leave your device.</p>
+            <div class="links">
+              <a class="btn primary" href="https://jiaxuan-lin.github.io/gesture-fx/" target="_blank" rel="noopener">Try it live <span class="arr">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="group">
+        <div class="group-head"><h3>p5.js sketches</h3><span>Try them right here</span></div>
       <div class="sketches">
         <article class="sketch">
           <div class="sketch-stage" id="sk-particle" aria-label="Interactive Particle sketch: click to move the ball"></div>
@@ -679,6 +709,7 @@ section[id] { scroll-margin-top: 86px; }
             <a class="link" href="https://editor.p5js.org/jiaxuanl/sketches/d57kn5pZU" target="_blank" rel="noopener">View code <span class="arr">↗</span></a>
           </div>
         </article>
+      </div>
       </div>
     </div>
   </section>
