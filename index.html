@@ -137,6 +137,12 @@ button { font: inherit; color: inherit; }
   padding: 10px 14px; border-radius: 12px; white-space: nowrap; transition: color .2s, background .2s;
 }
 .more-panel a:hover { background: var(--soft); color: var(--ink); }
+/* Projects dropdown in the top bar */
+.dd .more-panel { left: -6px; right: auto; min-width: 250px; transform-origin: top left; }
+.more-panel a small { display: block; margin-top: 1px; font-size: .75rem; font-weight: 500; color: var(--muted); }
+.more-panel a[aria-current="page"] { background: var(--soft); color: var(--accent); }
+.more-panel .dd-all { margin-top: 4px; border-top: 1px solid var(--line); border-radius: 0 0 12px 12px; font-size: .875rem; }
+@media (max-width: 420px) { .brand-name { display: none; } .brand { padding-right: 8px; } }
 .more-panel a[aria-current="true"] { background: var(--soft); color: var(--accent); }
 
 .mode {
@@ -570,9 +576,18 @@ section[id] { scroll-margin-top: 86px; }
 <header class="head">
   <div class="wrap">
     <nav class="nav" aria-label="Sections">
-      <a class="brand" href="#top"><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> Jiaxuan</a>
+      <a class="brand" href="#top"><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> <span class="brand-name">Jiaxuan</span></a>
+      <div class="more-wrap dd" id="pj-wrap">
+        <button class="more-btn dd-btn" type="button" aria-expanded="false" aria-controls="pj-panel">Projects <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="more-panel dd-panel" id="pj-panel">
+          <a href="projects/mini-trailer-shelter.html">Mini Trailer Shelter<small>Engineering design &amp; fabrication</small></a>
+          <a href="projects/m3-2025.html">M3 2025: Extreme Heat<small>Mathematical modeling</small></a>
+          <a href="projects/m3-2026.html">M3 2026: Sports Betting<small>Monte Carlo simulation</small></a>
+          <a href="projects/gesture-fx.html">Gesture FX<small>Interactive web app</small></a>
+          <a class="dd-all" href="#highlights">All featured projects <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
       <div class="nav-links" id="nav-links">
-        <a href="#highlights">Projects</a>
         <a href="#about">About</a>
         <a href="#cad">CAD</a>
         <a href="#code">Code</a>
@@ -1204,6 +1219,20 @@ section[id] { scroll-margin-top: 86px; }
   renderSeries(start, false);
   window.addEventListener("resize", moveInd);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
+
+  /* ---------- Projects dropdown ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll(".dd"), function (dd) {
+    var b = dd.querySelector(".dd-btn");
+    function set(o) { dd.classList.toggle("open", o); b.setAttribute("aria-expanded", o ? "true" : "false"); }
+    b.addEventListener("click", function (e) {
+      e.stopPropagation();
+      Array.prototype.forEach.call(document.querySelectorAll(".more-wrap.open"), function (w) { if (w !== dd) w.classList.remove("open"); });
+      set(!dd.classList.contains("open"));
+    });
+    Array.prototype.forEach.call(dd.querySelectorAll("a"), function (a) { a.addEventListener("click", function () { set(false); }); });
+    document.addEventListener("click", function (e) { if (!dd.contains(e.target)) set(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && dd.classList.contains("open")) { set(false); b.focus(); } });
+  });
 
   /* ---------- Nav: fold links that don't fit into "More" ---------- */
   var nav = document.querySelector(".nav"), navBar = document.getElementById("nav-links"),
