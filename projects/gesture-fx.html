@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gesture FX · Jiaxuan Lin</title>
+<meta name="description" content="A browser webcam playground where your hands and face control the camera effects.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="apple-touch-icon" href="../img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/project.css">
+<script>try { if (localStorage.getItem("jl-mode") === "dark") document.documentElement.setAttribute("data-mode", "dark"); } catch (e) {}</script>
+</head>
+<body>
+<header class="head">
+  <div class="wrap">
+    <nav class="nav pnav" aria-label="Site">
+      <a class="brand" href="../index.html"><img class="snor" src="../img/snorlax.png" alt="" width="102" height="96"> Jiaxuan</a>
+      <a class="back" href="../index.html#highlights">← All projects</a>
+      <button class="mode" id="mode" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Light / dark mode">
+        <span class="i-sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg></span>
+        <span class="i-moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a.6.6 0 0 0-.8-.7A9.5 9.5 0 1 0 21.2 15.4a.6.6 0 0 0-.7-.8z" fill="currentColor"/></svg></span>
+      </button>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="p-hero">
+  <div class="wrap">
+    <span class="eyebrow">2026 · Interactive Web App · Computer Vision</span>
+    <h1>Gesture FX</h1>
+    <ul class="chips"><li>JavaScript</li><li>MediaPipe</li><li>WebGL &amp; Canvas</li><li>Web Audio API</li></ul>
+    <p class="p-lede">Gesture FX is a little experiment in controlling camera effects without clicking buttons. Frame an area with your hands to add a filter, snap your fingers to switch effects, or blow to fog up the screen. You can even draw in the fog with your finger or wipe it away with your palm.</p>
+    <div class="p-links">
+      <a class="btn primary" href="https://jiaxuan-lin.github.io/gesture-fx/" target="_blank" rel="noopener">Try the live demo <span class="arr">↗</span></a>
+      <a class="btn" href="https://github.com/jiaxuan-lin/gesture-fx" target="_blank" rel="noopener">Source code <span class="arr">↗</span></a>
+    </div>
+    <figure class="p-fig hero">
+      <a href="https://jiaxuan-lin.github.io/gesture-fx/" target="_blank" rel="noopener"><img src="../img/project-gesture-fx.jpg" alt="Gesture FX start screen with a Start camera button" width="800" height="500"></a>
+      <figcaption>The start screen. The demo needs a camera, and works best in Chrome on a laptop or desktop.</figcaption>
+    </figure>
+    
+  </div>
+</section>
+
+<div class="wrap p-body">
+  <section class="p-sec">
+    <span class="eyebrow">The idea</span>
+    <h2>Gestures instead of buttons</h2>
+    <p>I wanted to experiment with making camera effects feel more interactive than just clicking through filters. What if you could control them with the same gestures you’d use in real life? Gesture FX turned into a browser-based webcam playground where your hands and face become the controls.</p>
+  </section>
+
+  <section class="p-sec">
+    <span class="eyebrow">Interactions</span>
+    <h2>What you can do</h2>
+    <ul>
+      <li><b>Frame</b> an area with both hands (thumbs and index fingers) to put a filter inside it. Pinch both hands to switch box filters.</li>
+      <li><b>Snap</b> your fingers to change the whole-camera filter: right hand for next, left hand for previous.</li>
+      <li><b>Blow</b> with your mouth open to fog up the screen.</li>
+      <li><b>Point</b> a finger to write in the fog, or wipe it away with an open palm.</li>
+      <li><b>Swipe</b> an open hand across the screen to reset everything.</li>
+    </ul>
+  </section>
+
+  <section class="p-sec">
+    <span class="eyebrow">Technology</span>
+    <h2>How it works</h2>
+    <p>The app uses Google’s MediaPipe to track hand gestures and facial landmarks in real time. It combines that tracking with microphone input for interactions like snapping and blowing, then draws the effects over the camera feed with WebGL.</p>
+    <p>One of the interesting challenges was making gestures feel responsive without triggering effects by accident. The app smooths the tracking data and waits for a gesture to stay steady across several frames before it reacts.</p>
+    <p><b>Privacy:</b> everything runs locally in your browser. The app downloads its tracking models when it starts, but your camera footage and microphone audio are never uploaded anywhere.</p>
+  </section>
+
+  <section class="p-sec">
+    <span class="eyebrow">Reflection</span>
+    <h2>What I learned</h2>
+    <p>This project gave me a first look at computer vision, gesture recognition, and the challenge of turning raw tracking data into interactions that feel natural. It also made me think more about interface design, and how people can use software without relying entirely on traditional buttons and menus.</p>
+  </section>
+
+  <nav class="p-next" aria-label="More projects">
+    <a class="link" href="m3-2026.html"><span class="arr">←</span> M3 2026, Sports Betting</a>
+    <a class="link" href="../index.html#highlights">All projects <span class="arr">→</span></a>
+  </nav>
+</div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Jiaxuan Lin</span>
+    <span><img class="snor" src="../img/snorlax.png" alt="" width="102" height="96"> Thanks for visiting</span>
+  </div>
+</footer>
+<script src="../assets/project.js"></script>
+</body>
+</html>

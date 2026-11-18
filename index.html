@@ -298,6 +298,54 @@ section[id] { scroll-margin-top: 86px; }
 .plan .tile .img { background: #fff; border: 1px solid var(--line); }
 .plan .tile img { aspect-ratio: auto; object-fit: contain; }
 
+/* ---------- Featured project previews ---------- */
+[hidden] { display: none !important; }
+.featured { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+.fcard {
+  display: flex; flex-direction: column; text-decoration: none; min-width: 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s;
+}
+.fcard:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.fcard .fshot { aspect-ratio: 16 / 9; overflow: hidden; background: #fff; }
+.fcard .fshot img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.8,.2,1); }
+.fcard .fshot.chart img { object-fit: contain; padding: 10px 14px; }
+.fcard:hover .fshot img { transform: scale(1.03); }
+.fcard .fbody { display: grid; gap: 8px; align-content: start; flex: 1; padding: 18px 20px 20px; }
+.fcard .fmeta { font-size: .8125rem; font-weight: 600; color: var(--accent); }
+.fcard h3 { font-family: var(--serif); font-weight: 500; font-size: 1.375rem; line-height: 1.2; margin: 0; }
+.fcard .tag { justify-self: start; }
+.fcard p { margin: 0; font-size: .9375rem; color: var(--muted); }
+.fcard .go { margin-top: 4px; font-weight: 600; font-size: .9375rem; }
+.fcard .go .arr { color: var(--accent); display: inline-block; transition: transform .25s; }
+.fcard:hover .go .arr { transform: translateX(3px); }
+.slim {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 20px;
+  margin-top: 16px; padding: 16px 20px; border-radius: var(--r); background: var(--soft); font-size: .9375rem;
+}
+.more-toggle { margin-top: 16px; }
+.gallery-more { display: flex; justify-content: center; margin-top: 18px; }
+.gallery-more:empty { display: none; }
+.proj.compact .proj-shot img { aspect-ratio: 16 / 10; }
+@media (min-width: 860px) { .proj.compact { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
+
+/* Collapsible sections (native <details>): used on the homepage and the project pages */
+.deep { border: 1px solid var(--line); border-radius: 18px; background: var(--surface); margin-top: 16px; }
+.deep > summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 20px; font-weight: 700; border-radius: 18px;
+}
+.deep > summary::-webkit-details-marker { display: none; }
+.deep > summary::after {
+  content: ""; flex: none; width: 10px; height: 10px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
+  transform: rotate(45deg) translateY(-3px); transition: transform .25s;
+}
+.deep[open] > summary::after { transform: rotate(225deg) translateY(-2px); }
+.deep > summary:hover { background: var(--soft); }
+.deep > summary small { display: block; font-weight: 500; font-size: .875rem; color: var(--muted); margin-top: 2px; }
+.deep .deep-in { padding: 4px 20px 20px; }
+.deep .deep-in > :first-child { margin-top: 6px; }
+
 /* ---------- Creative coding ---------- */
 .proj { display: grid; gap: 0; padding: 0; overflow: hidden; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 860px) { .proj { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
@@ -524,7 +572,7 @@ section[id] { scroll-margin-top: 86px; }
     <nav class="nav" aria-label="Sections">
       <a class="brand" href="#top"><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> Jiaxuan</a>
       <div class="nav-links" id="nav-links">
-        <a href="#highlights">Highlights</a>
+        <a href="#highlights">Projects</a>
         <a href="#about">About</a>
         <a href="#cad">CAD</a>
         <a href="#code">Code</a>
@@ -585,35 +633,54 @@ section[id] { scroll-margin-top: 86px; }
   <section class="sec" id="highlights">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow">Highlights</span>
+        <span class="eyebrow">Featured projects</span>
         <h2>A Few Things I'm <em>Proud</em> of</h2>
+        <p>Short previews here; open any project for the full story, figures, and what I learned.</p>
       </div>
-      <div class="bento">
-        <article class="card b-award">
-          <div class="shot"><img src="img/cad-14.jpg" alt="Small wooden trailer shelter model with a lit interior" loading="lazy"></div>
-          <div class="in">
-            <div class="tags"><span class="tag">Winner · Judges’ Prize for Best Designed 2D &amp; 3D Model</span><span class="tag">Featured on the Autodesk Instructables front page</span></div>
+      <div class="featured">
+        <a class="fcard" href="projects/mini-trailer-shelter.html">
+          <div class="fshot"><img src="img/projects/trailer/hero.jpg" alt="Laser-cut wooden scale model of the trailer shelter" width="1400" height="787" loading="lazy"></div>
+          <div class="fbody">
+            <span class="fmeta">2024–2025 · Engineering design &amp; fabrication</span>
             <h3>Mini Trailer Shelter</h3>
-            <p>A tiny shelter designed to be small but serviceable. I modeled it in Inventor and built it. It won the Judges’ Prize for Best Designed 2D &amp; 3D Model in Autodesk's Make it Small 2025 contest and was featured on the front page of Autodesk Instructables, where it has over 12k views.</p>
-            <a class="link" href="https://www.instructables.com/Mini-Trailer-Shelter-Make-It-Small-But-Serviceable/" target="_blank" rel="noopener">View on Instructables <span class="arr">↗</span></a>
+            <span class="tag">Winner · Judges’ Prize for Best Designed 2D &amp; 3D Model</span>
+            <p>A towable 6 × 8 ft shelter concept for people experiencing homelessness. I planned it in AutoCAD, modeled it in Revit and Inventor, and built a laser-cut scale model.</p>
+            <span class="go">Read the case study <span class="arr">→</span></span>
           </div>
-        </article>
-        <article class="card b-m3">
-          <span class="eyebrow">Math modeling</span>
-          <div class="big" style="font-size:clamp(1.75rem,3.4vw,2.25rem);line-height:1.1">Triage Advancers (Top 17%)</div>
-          <h3>M3 Math Challenge</h3>
-          <p>Placed in the top 17% internationally, two years in a row.</p>
-          <div class="links">
-            <a class="link" href="https://drive.google.com/file/d/17trVlA8zza9Q1kyWgT0UgiALd9tOJ5jz/view" target="_blank" rel="noopener">2025 Report <span class="arr">↗</span></a>
-            <a class="link" href="https://drive.google.com/file/d/1rdBRqN2_Cumk-5Z-yu2oW_ZKsXLvhAFW/view" target="_blank" rel="noopener">2026 Report <span class="arr">↗</span></a>
+        </a>
+        <a class="fcard" href="projects/m3-2025.html">
+          <div class="fshot chart"><img src="img/projects/m3-2025/indoor-temperature.png" alt="Chart of predicted indoor temperatures over a 24-hour heat wave" width="1369" height="779" loading="lazy"></div>
+          <div class="fbody">
+            <span class="fmeta">2025 · Mathematical modeling · Team lead</span>
+            <h3>M3 2025: Extreme Heat in Memphis</h3>
+            <span class="tag">Triage Advancer · top ~17%</span>
+            <p>How hot do homes get in a heat wave, and which neighborhoods need help first? Our team modeled indoor temperatures, electricity demand, and neighborhood vulnerability.</p>
+            <span class="go">Read the case study <span class="arr">→</span></span>
           </div>
-        </article>
-        <article class="card b-web">
-          <span class="eyebrow">On the web</span>
-          <h3>Explortle</h3>
-          <p>Student-led STEM outreach program for underrepresented students across NYC.</p>
-          <a class="link" href="https://explortle.org/" target="_blank" rel="noopener">explortle.org <span class="arr">↗</span></a>
-        </article>
+        </a>
+        <a class="fcard" href="projects/m3-2026.html">
+          <div class="fshot chart"><img src="img/projects/m3-2026/model-validation.png" alt="Chart comparing the simulation's predicted totals with target values" width="1400" height="857" loading="lazy"></div>
+          <div class="fbody">
+            <span class="fmeta">2026 · Monte Carlo simulation · Team lead</span>
+            <h3>M3 2026: The Cost of Sports Betting</h3>
+            <span class="tag">Triage Advancer · top ~17%</span>
+            <p>We simulated a year of sports betting with a Monte Carlo model and compared the losses with people’s disposable income. The average simulated U.S. bettor lost about $289.</p>
+            <span class="go">Read the case study <span class="arr">→</span></span>
+          </div>
+        </a>
+        <a class="fcard" href="projects/gesture-fx.html">
+          <div class="fshot"><img src="img/project-gesture-fx.jpg" alt="Gesture FX start screen" width="800" height="500" loading="lazy"></div>
+          <div class="fbody">
+            <span class="fmeta">2026 · Interactive web app</span>
+            <h3>Gesture FX</h3>
+            <p>A little experiment in controlling camera effects without clicking buttons: frame an area with your hands to add a filter, snap to switch effects, or blow to fog up the screen.</p>
+            <span class="go">See the project <span class="arr">→</span></span>
+          </div>
+        </a>
+      </div>
+      <div class="slim">
+        <span><b>Explortle</b> · Student-led STEM outreach program for underrepresented students across NYC.</span>
+        <a class="link" href="https://explortle.org/" target="_blank" rel="noopener">explortle.org <span class="arr">↗</span></a>
       </div>
     </div>
   </section>
@@ -649,17 +716,19 @@ section[id] { scroll-margin-top: 86px; }
         <p>Modeled in Autodesk Inventor and AutoCAD. Some of them made it off the screen and into the real world. Tap any one to see it larger.</p>
       </div>
       <div class="group">
-        <div class="group-head"><h3>3D models</h3><span>Autodesk Inventor · <span data-count="model"></span></span></div>
-        <div class="cad-grid" data-cad="model"></div>
-      </div>
-      <div class="group">
         <div class="group-head"><h3>Made for real</h3><span>Computer-aided manufacturing · <span data-count="made"></span></span></div>
         <div class="cad-grid made" data-cad="made"></div>
       </div>
       <div class="group">
-        <div class="group-head"><h3>Floorplan</h3><span>Autodesk AutoCAD</span></div>
-        <div class="cad-grid plan" data-cad="plan" style="grid-template-columns:minmax(0,1fr)"></div>
+        <div class="group-head"><h3>3D models</h3><span>Autodesk Inventor · <span data-count="model"></span></span></div>
+        <div class="cad-grid" data-cad="model"></div>
       </div>
+      <details class="deep group">
+        <summary>Floorplan: Large Cat Cafe<small>Autodesk AutoCAD</small></summary>
+        <div class="deep-in">
+          <div class="cad-grid plan" data-cad="plan" style="grid-template-columns:minmax(0,1fr)"></div>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -669,21 +738,22 @@ section[id] { scroll-margin-top: 86px; }
       <div class="sec-head">
         <span class="eyebrow">Creative coding</span>
         <h2>Playing With <em>Code</em></h2>
-        <p>Interactive things I've made, from a webcam effects app to small p5.js sketches that run right here.</p>
+        <p>Interactive things I've made: a webcam effects app I designed and built with AI coding agents, and small p5.js sketches that run right here.</p>
       </div>
       <div class="group">
-        <div class="group-head"><h3>Web apps</h3><span>Interactive browser projects</span></div>
-        <article class="card proj">
-          <a class="proj-shot" href="https://jiaxuan-lin.github.io/gesture-fx/" target="_blank" rel="noopener" aria-label="Open Gesture FX">
+        <div class="group-head"><h3>Built with AI</h3><span>My ideas and interaction design, coded by AI agents</span></div>
+        <article class="card proj compact">
+          <a class="proj-shot" href="projects/gesture-fx.html" aria-label="Gesture FX project page">
             <img src="img/project-gesture-fx.jpg" alt="Gesture FX start screen" width="800" height="500" loading="lazy">
           </a>
           <div class="proj-body">
             <span class="k">Web app · Hand &amp; face tracking</span>
             <h3>Gesture FX</h3>
-            <p>Camera effects you control with your hands and face. Frame a shape with both hands to filter it, snap your fingers to switch filters, blow to fog up the screen, then write in the fog with your finger or wipe it away with your palm.</p>
-            <p class="proj-note">Runs entirely in your browser, so your camera and mic never leave your device.</p>
+            <p>Gesture FX is a little experiment in controlling camera effects without clicking buttons. Frame an area with your hands to add a filter, snap your fingers to switch effects, or blow to fog up the screen. You can even draw in the fog with your finger or wipe it away with your palm.</p>
+            <p class="proj-note">Everything runs right in your browser, so your camera and microphone data stay on your device. I came up with the idea and designed and tested the interactions; the code was written by AI coding agents.</p>
             <div class="links">
               <a class="btn primary" href="https://jiaxuan-lin.github.io/gesture-fx/" target="_blank" rel="noopener">Try it live <span class="arr">↗</span></a>
+              <a class="btn" href="projects/gesture-fx.html">Project page <span class="arr">→</span></a>
             </div>
           </div>
         </article>
@@ -727,6 +797,7 @@ section[id] { scroll-margin-top: 86px; }
         <div class="seg" role="tablist" aria-label="Photo series" id="tabs"><span class="seg-ind" id="seg-ind"></span></div>
       </div>
       <div class="gallery" id="gallery" role="tabpanel"></div>
+      <div class="gallery-more" id="gallery-more"></div>
       <div class="more" id="more" aria-label="Switch photo series"></div>
     </div>
   </section>
@@ -787,7 +858,6 @@ section[id] { scroll-margin-top: 86px; }
         </div>
         <div class="links">
           <a class="link" href="https://www.linkedin.com/in/jiaxuanlin-mit2030/" target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
-          <a class="link" href="https://github.com/jiaxuan-lin" target="_blank" rel="noopener">GitHub <span class="arr">↗</span></a>
         </div>
         <form class="msg" id="msg-form" novalidate>
           <h3>Send me a message!</h3>
@@ -810,7 +880,7 @@ section[id] { scroll-margin-top: 86px; }
 <footer class="foot">
   <div class="wrap">
     <span>© <span id="yr">2026</span> Jiaxuan Lin</span>
-    <span><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> Thanks for visiting</span>
+    <span><img class="snor" src="img/snorlax.png" alt="" width="102" height="96"> Thanks for visiting · Thanks for visiting</span>
   </div>
 </footer>
 
@@ -1021,6 +1091,21 @@ section[id] { scroll-margin-top: 86px; }
       b.addEventListener("click", function () { open(items, i); });
       grid.appendChild(b);
     });
+    /* Show the first few models; the rest open with one button */
+    var SHOW = 6;
+    if (kind === "model" && rows.length > SHOW) {
+      var tiles = Array.prototype.slice.call(grid.children, SHOW);
+      tiles.forEach(function (t) { t.hidden = true; });
+      var mt = el("button", "btn more-toggle"); mt.type = "button"; mt.setAttribute("aria-expanded", "false");
+      mt.textContent = "Show all " + rows.length + " models";
+      mt.addEventListener("click", function () {
+        var open2 = mt.getAttribute("aria-expanded") !== "true";
+        tiles.forEach(function (t) { t.hidden = !open2; });
+        mt.setAttribute("aria-expanded", open2 ? "true" : "false");
+        mt.textContent = open2 ? "Show fewer models" : "Show all " + rows.length + " models";
+      });
+      grid.parentNode.appendChild(mt);
+    }
   });
 
   /* ---------- Photography ---------- */
@@ -1031,7 +1116,7 @@ section[id] { scroll-margin-top: 86px; }
     ind.style.width = active.offsetWidth + "px";
     ind.style.transform = "translateX(" + (active.offsetLeft) + "px)";
   }
-  var placed = [], cols = 0;
+  var placed = [], cols = 0, curSid = null, showAll = {}, LIMIT = 12;
   function colCount() { var w = gallery.clientWidth || window.innerWidth; return w >= 860 ? 3 : (w >= 500 ? 2 : 1); }
   /* Fill columns left to right, always into the shortest one, so the color order reads top to bottom */
   function layout() {
@@ -1039,7 +1124,7 @@ section[id] { scroll-margin-top: 86px; }
     var colEls = [], heights = [];
     gallery.innerHTML = "";
     for (var c = 0; c < cols; c++) { var ce = el("div", "gcol"); gallery.appendChild(ce); colEls.push(ce); heights.push(0); }
-    placed.forEach(function (p) {
+    placed.slice(0, showAll[curSid] ? placed.length : LIMIT).forEach(function (p) {
       var k = 0; for (var c2 = 1; c2 < cols; c2++) if (heights[c2] < heights[k] - 0.02) k = c2;
       colEls[k].appendChild(p.el); heights[k] += p.ratio;
     });
@@ -1062,12 +1147,20 @@ section[id] { scroll-margin-top: 86px; }
       b.addEventListener("click", function () { open(items, i); });
       placed.push({ el: b, ratio: DIMS[id] ? DIMS[id][1] / DIMS[id][0] : 1 });
     });
+    curSid = sid;
     layout();
+    var gm = document.getElementById("gallery-more"); gm.innerHTML = "";
+    if (ids.length > LIMIT && !showAll[sid]) {
+      var sa = el("button", "btn"); sa.type = "button";
+      sa.textContent = "Show all " + ids.length + " " + name + " photos";
+      sa.addEventListener("click", function () { showAll[sid] = true; layout(); gm.innerHTML = ""; lbl.textContent = "That's all for " + name + ". Keep browsing:"; });
+      gm.appendChild(sa);
+    }
     /* Buttons under the photos to jump to another series */
     var more = document.getElementById("more"), k = SERIES.map(function (x) { return x.id; }).indexOf(sid);
     var nextId = SERIES[(k + 1) % SERIES.length].id;
     more.innerHTML = "";
-    var lbl = el("span", "more-lbl"); lbl.textContent = "That's all for " + name + ". Keep browsing:"; more.appendChild(lbl);
+    var lbl = el("span", "more-lbl"); lbl.textContent = (ids.length > LIMIT && !showAll[sid]) ? "Or jump to another series:" : "That's all for " + name + ". Keep browsing:"; more.appendChild(lbl);
     SERIES.forEach(function (s2) {
       if (s2.id === sid) return;
       var isNext = s2.id === nextId;

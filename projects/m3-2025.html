@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>M3 2025: Extreme Heat in Memphis · Jiaxuan Lin</title>
+<meta name="description" content="Three mathematical models of a Memphis heat wave: indoor temperatures, electricity demand, and neighborhood vulnerability. SIAM M3 Challenge Triage Advancer.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="apple-touch-icon" href="../img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/project.css">
+<script>try { if (localStorage.getItem("jl-mode") === "dark") document.documentElement.setAttribute("data-mode", "dark"); } catch (e) {}</script>
+</head>
+<body>
+<header class="head">
+  <div class="wrap">
+    <nav class="nav pnav" aria-label="Site">
+      <a class="brand" href="../index.html"><img class="snor" src="../img/snorlax.png" alt="" width="102" height="96"> Jiaxuan</a>
+      <a class="back" href="../index.html#highlights">← All projects</a>
+      <button class="mode" id="mode" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Light / dark mode">
+        <span class="i-sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg></span>
+        <span class="i-moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a.6.6 0 0 0-.8-.7A9.5 9.5 0 1 0 21.2 15.4a.6.6 0 0 0-.7-.8z" fill="currentColor"/></svg></span>
+      </button>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="p-hero">
+  <div class="wrap">
+    <span class="eyebrow">2025 · Mathematical Modeling · Climate Resilience</span>
+    <h1><small>M3 Math Challenge 2025</small>Modeling Extreme Heat in Memphis</h1>
+    <ul class="chips">
+      <li class="win">SIAM M3 Challenge · Triage Advancer (top ~17%)</li>
+      <li>Role: Team Lead · five-person team</li>
+    </ul>
+    <ul class="chips"><li>Python</li><li>scikit-learn</li><li>Google Sheets</li></ul>
+    <p class="p-lede">How can a city prepare for extreme heat, especially when rising temperatures put pressure on its electricity grid and the people who are most vulnerable? For the 2025 M3 Challenge, our team chose Memphis, Tennessee, and built three models to investigate that question.</p>
+    <figure class="p-fig chart">
+      <img src="../img/projects/m3-2025/indoor-temperature.png" alt="Line chart of predicted indoor temperatures for four homes and the outside temperature over 24 hours, peaking around 3 PM" width="1369" height="779">
+      <figcaption>Our predicted indoor temperatures for four homes (and the outdoor temperature) over a 24-hour heat wave.</figcaption>
+    </figure>
+    
+  </div>
+</section>
+
+<div class="wrap p-body">
+  <section class="p-sec">
+    <span class="eyebrow">Key findings</span>
+    <h2>What our models suggested</h2>
+    <div class="stats3">
+      <div class="stat"><strong>~3 PM</strong><span>when indoor temperatures peaked in homes without air conditioning</span></div>
+      <div class="stat"><strong>~4,832 MW</strong><span>estimated peak electricity demand in a severe heat wave, under our assumptions</span></div>
+      <div class="stat"><strong>691 / 1,000</strong><span>highest relative vulnerability score in our sample (East Memphis)</span></div>
+    </div>
+  </section>
+
+  <section class="p-sec">
+    <span class="eyebrow">Model 1</span>
+    <h2>Indoor temperatures during a heat wave</h2>
+    <p>Our first task was to predict how the temperature inside four different homes would change over 24 hours without air conditioning. Our results predicted that indoor temperatures would generally rise throughout the day, peak around 3 PM, and gradually decline afterward.</p>
+    <details class="deep">
+      <summary>Method: Newton’s Law of Heating<small>Heat transfer, insulation, and sensitivity testing</small></summary>
+      <div class="deep-in">
+        <p>We used Newton’s Law of Heating to model heat transfer between the outdoor environment and the inside of each home. The model accounted for differences in building materials and insulation, allowing us to compare how homes responded to the same outdoor temperatures.</p>
+        <p>We also tested how sensitive the model was to changes in the input temperatures by introducing small variations and comparing the resulting predictions.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="p-sec">
+    <span class="eyebrow">Model 2</span>
+    <h2>Forecasting electricity demand</h2>
+    <p>Next, we looked at how heat waves could affect Memphis’s electricity grid. Under our assumptions, we estimated that Memphis could see peak electricity demand of approximately 4,832 MW during a severe heat-wave scenario, and we projected how maximum temperatures and demand might change over the next 20 years.</p>
+    <figure class="p-fig chart">
+      <img src="../img/projects/m3-2025/peak-temperature-forecast.png" alt="Scatter of observed Memphis peak temperatures with a fitted curve and a dashed projection rising toward 2045" width="1012" height="727" loading="lazy">
+      <figcaption>Observed peak temperatures, our fitted curve, and our projection for the next 20 years.</figcaption>
+    </figure>
+    <details class="deep">
+      <summary>Method: curve fitting in Python<small>Historical consumption data and seasonal comparisons</small></summary>
+      <div class="deep-in">
+        <p>Using historical electricity consumption data, we developed a logistic curve-fitting model in Python (with scikit-learn) to examine longer-term trends. We also compared seasonal electricity usage and temperatures to estimate how much additional electricity might be needed during extreme heat.</p>
+        <p>This part of the challenge introduced us to how hard it is to forecast real-world systems, especially when future technology, infrastructure, and policy decisions are unknown.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="p-sec">
+    <span class="eyebrow">Model 3</span>
+    <h2>Identifying vulnerable neighborhoods</h2>
+    <p>Our final task was to figure out which Memphis neighborhoods might be most vulnerable during a heat wave. Our model gave East Memphis the highest relative vulnerability score in our sample, at 691 out of 1,000, while the Lakeland–Arlington–Brunswick group received one of the lowest, at 366.</p>
+    <figure class="p-fig chart">
+      <img src="../img/projects/m3-2025/vulnerability-scores.png" alt="Bar chart of relative vulnerability scores for 15 Memphis neighborhoods or neighborhood groups" width="1312" height="1509" loading="lazy">
+      <figcaption>Relative vulnerability scores (out of 1,000) for the neighborhoods we studied.</figcaption>
+    </figure>
+    <details class="deep">
+      <summary>Method: a weighted vulnerability index<small>11 factors, min-max normalization, weighted scoring</small></summary>
+      <div class="deep-in">
+        <p>We collected and organized data for 15 neighborhoods or neighborhood groups, considering 11 factors related to demographics, infrastructure, economics, and environmental conditions. These included household income, building age, access to emergency resources, vulnerable populations, and power-grid reliability.</p>
+        <p>Since the factors used different units and scales, we applied min-max normalization to make them comparable. We then developed a weighted scoring system that placed greater emphasis on socioeconomic vulnerability.</p>
+        <p>The goal was to explore how quantitative models could help policymakers prioritize resources such as cooling centers, emergency assistance, and infrastructure improvements.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="p-sec">
+    <span class="eyebrow">Limitations</span>
+    <h2>Assumptions and limits</h2>
+    <p>Our predictions and vulnerability scores were estimates based on simplified models, not validated measurements of future conditions. In particular, our neighborhood rankings depended on the data and weights we selected. One of the hardest parts was deciding which assumptions were reasonable when complete data wasn’t available, and balancing model complexity against our limited time.</p>
+  </section>
+
+  <section class="p-sec">
+    <span class="eyebrow">Reflection</span>
+    <h2>What I learned</h2>
+    <p>This challenge showed me how mathematical modeling connects concepts from physics, statistics, computer science, and public policy. It was a valuable introduction to building models for messy, real-world problems where there isn’t always one correct answer.</p>
+    <div class="p-links">
+      <a class="btn primary" href="https://drive.google.com/file/d/17trVlA8zza9Q1kyWgT0UgiALd9tOJ5jz/view" target="_blank" rel="noopener">Full 2025 report (PDF) <span class="arr">↗</span></a>
+      <a class="btn" href="https://m3challenge.siam.org/" target="_blank" rel="noopener">About the M3 Challenge <span class="arr">↗</span></a>
+    </div>
+  </section>
+
+  <nav class="p-next" aria-label="More projects">
+    <a class="link" href="mini-trailer-shelter.html"><span class="arr">←</span> Mini Trailer Shelter</a>
+    <a class="link" href="m3-2026.html">Next: M3 2026, Sports Betting <span class="arr">→</span></a>
+  </nav>
+</div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Jiaxuan Lin</span>
+    <span><img class="snor" src="../img/snorlax.png" alt="" width="102" height="96"> Thanks for visiting</span>
+  </div>
+</footer>
+<script src="../assets/project.js"></script>
+</body>
+</html>

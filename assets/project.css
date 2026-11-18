@@ -1,0 +1,69 @@
+/* Project case-study pages. Builds on assets/site.css (same tokens, fonts and components). */
+.pnav { gap: 6px; }
+.pnav .back {
+  text-decoration: none; font-size: .875rem; font-weight: 600; color: var(--muted);
+  padding: 7px 13px; border-radius: 999px; white-space: nowrap; transition: color .2s, background .2s;
+}
+.pnav .back:hover { color: var(--ink); background: var(--soft); }
+
+.p-hero { padding-block: clamp(48px, 8vw, 96px) 8px; }
+.p-hero h1 {
+  font-family: var(--serif); font-weight: 500; font-size: clamp(2.25rem, 6vw, 4.25rem);
+  line-height: 1.02; letter-spacing: -.03em; margin: 10px 0 14px; text-wrap: balance; max-width: 22ch;
+}
+.p-hero h1 small { display: block; font-family: var(--sans); font-size: .9rem; font-weight: 600; letter-spacing: .02em; color: var(--muted); margin-bottom: 8px; }
+.p-lede { font-size: clamp(1.125rem, 2vw, 1.3125rem); line-height: 1.6; color: var(--muted); max-width: 42rem; margin: 0 0 20px; text-wrap: pretty; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 14px; }
+.chips li { font-size: .8125rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); }
+.chips li.win { background: var(--soft); color: var(--accent); border-color: transparent; }
+
+.p-fig { margin: 28px 0 0; }
+.p-fig img { width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
+.p-fig.hero img { aspect-ratio: 16 / 9; object-fit: cover; }
+.p-fig figcaption { font-size: .875rem; color: var(--muted); margin-top: 10px; }
+.p-fig.chart img { padding: clamp(8px, 2vw, 18px); }
+
+.p-body { padding-block: 24px 40px; }
+.p-sec { max-width: 46rem; margin-top: clamp(44px, 6vw, 64px); }
+.p-sec.wide { max-width: none; }
+.p-sec h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.625rem, 3.4vw, 2.125rem); line-height: 1.15; letter-spacing: -.02em; margin: 6px 0 12px; }
+.p-sec h3 { font-family: var(--serif); font-weight: 500; font-size: 1.375rem; margin: 26px 0 8px; }
+.p-sec p { margin: 0 0 1em; color: var(--ink); }
+.p-sec ul { margin: 0 0 1em; padding-left: 1.2em; }
+.p-sec li { margin-bottom: .35em; }
+
+/* Key numbers */
+.stats3 { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); margin-top: 18px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+.stat strong { display: block; font-family: var(--serif); font-weight: 500; font-size: clamp(1.75rem, 3.6vw, 2.25rem); line-height: 1.1; color: var(--accent); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.stat span { font-size: .9375rem; color: var(--muted); }
+
+/* Honest-credit note */
+.credit { display: flex; gap: 12px; align-items: flex-start; background: var(--soft); border-radius: 18px; padding: 16px 18px; margin-top: 22px; max-width: 46rem; font-size: .9375rem; }
+.credit b { font-weight: 700; }
+
+/* Proposed vs. built */
+.compare { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); margin-top: 14px; }
+.compare > div { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+.compare h3 { margin: 0 0 8px; font-size: 1.1875rem; }
+.compare ul { margin: 0; }
+
+/* Image grids */
+.pgrid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); margin-top: 16px; }
+.pgrid figure { margin: 0; }
+.pgrid img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); background: #fff; }
+.pgrid img.contain { object-fit: contain; }
+.pgrid figcaption { font-size: .8125rem; color: var(--muted); margin-top: 6px; }
+
+/* Collapsible sections (.deep) live in site.css so the homepage can use them too. */
+
+/* Data table */
+.tablewrap { overflow-x: auto; margin-top: 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.tablewrap table { border-collapse: collapse; width: 100%; font-size: .9375rem; font-variant-numeric: tabular-nums; }
+.tablewrap th, .tablewrap td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.tablewrap th { font-size: .8125rem; color: var(--muted); font-weight: 700; }
+.tablewrap tr:last-child td { border-bottom: 0; }
+.tablewrap tr.hi td { background: var(--soft); font-weight: 700; }
+
+.p-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.p-next { margin-top: clamp(56px, 8vw, 88px); padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
